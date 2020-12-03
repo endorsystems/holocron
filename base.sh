@@ -208,8 +208,8 @@ EOF
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 
 # Changing passwords
-echo "${root_pass}\n${root_pass}" | arch-chroot /mnt passwd
-echo "${sudo_user_pass}\n${sudo_user_pass}" | arch-chroot /mnt passwd ${sudo_user} | echo "${sudo_user_pass}"
+echo "${root_pass}\n${root_pass}" | passwd --root /mnt root
+echo "${sudo_user_pass}\n${sudo_user_pass}" | passwd --root /mnt ${sudo_user}
 
 # Systemd enables
 arch-chroot /mnt systemctl enable sshd
