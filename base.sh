@@ -72,7 +72,8 @@ mount "${disk}1" /mnt/boot
 
 # Package installation
 # packages=`source vars/laptop_packages`
-pacstrap /mnt base \
+pacstrap /mnt \
+    base \
     base-devel \
     linux \
     linux-firmware \
@@ -142,6 +143,7 @@ pacstrap /mnt base \
     cryptsetup \
     lvm2 \
     grub \
+    zsh \
     os-prober \
     efibootmgr \
     libva-intel-driver \
@@ -195,17 +197,15 @@ arch-chroot /mnt ufw enable
 
 ## Samba
 cat <<EOF > /mnt/etc/ufw/applications.d/samba
-[Samba]
+[samba]
 title=LanManager-like file and printer server for Unix
 description=The Samba software suite is a collection of programs that implements the SMB/CIFS protocol for unix systems, allowing you to serve 
 files and printers to Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred to as the LanManager or NetBIOS protocol.
 ports=137,138/udp|139,445/tcp
 EOF
-arch-chroot /mnt ufw app update samba
-arch-chroot /mnt ufw allow Samba
 
 # User permissions
-arch-chroot /mnt echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${sudo_user}
+echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 
 # Changing passwords
 echo "${root_pass}\n${root_pass}" | arch-chroot /mnt passwd
@@ -220,5 +220,13 @@ arch-chroot /mnt systemctl enable docker
 arch-chroot /mnt systemctl enable ufw.service
 
 # Bootloader
+# TODO: looking at EFI, but defaulting to GRUB
 
-# Start post config
+# GRUB / MBR - Basic install (No EFI) #
+grub-install ${disk}
+grub-mkconfig -o /boot/grub/grub.cfg
+
+## Start post config ##
+
+# AUR installer
+#source aur.sh
