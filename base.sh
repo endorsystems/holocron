@@ -223,8 +223,8 @@ arch-chroot /mnt systemctl enable ufw.service
 # TODO: looking at EFI, but defaulting to GRUB
 
 # GRUB / MBR - Basic install (No EFI) #
-grub-install ${disk}
-grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt grub-install ${disk}
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 
