@@ -3,8 +3,5 @@
 # post_setup.sh
 #
 #
-## Post install items (git, themes, configs)
 
-# Setup fontconfig
-
-# 
+# TODO: This to replace some of the customizations I've placed in the base.sh file.

@@ -144,6 +144,10 @@ pacstrap /mnt \
     lvm2 \
     grub \
     zsh \
+    i3 \
+    rofi \
+    dunst \
+    alacritty \
     os-prober \
     efibootmgr \
     libva-intel-driver \
