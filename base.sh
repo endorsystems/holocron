@@ -10,7 +10,8 @@
 
 # Hostname
 echo "Please type in the desired hostname."
-read hostname | echo "\n"
+read hostname
+echo "\n"
 
 # Sudoer
 echo "Please enter the name of the super user."
