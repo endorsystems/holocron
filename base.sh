@@ -79,6 +79,20 @@ mount "${disk}1" /mnt/boot
 #     # Laptop Template
 # fi
 
+# Local repo?
+echo "Please enter a local repo IP. Blank will default to basic public."
+read repo_url
+
+if [ -z "$repo_url" ]
+then
+    echo "No Repo selected, using defaults."
+else
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+    echo "Server = ${repo_url}/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+    echo "Server added, updating repo..."\n
+    pacman -Sy
+fi
+
 # Package installation
 # packages=`source vars/laptop_packages`
 pacstrap /mnt \
