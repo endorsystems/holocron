@@ -88,7 +88,7 @@ then
     echo "No Repo selected, using defaults."
 else
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-    echo "Server = ${repo_url}/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+    echo "Server = ${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
     echo "Server added, updating repo..."\n
     pacman -Sy
 fi
