@@ -81,6 +81,7 @@ mount "${disk}1" /mnt/boot
 
 # Local repo?
 echo "Please enter a local repo IP. Blank will default to basic public."
+echo "Example: 10.0.0.3"
 read repo_url
 
 if [ -z "$repo_url" ]
@@ -88,7 +89,7 @@ then
     echo "No Repo selected, using defaults."
 else
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-    echo "Server = ${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+    echo "Server = http://${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
     echo "Server added, updating repo..."\n
     pacman -Sy
 fi
