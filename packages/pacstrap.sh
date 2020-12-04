@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# Sourced from base.sh
+# TODO: shrink this to base packages for running the system
 pacstrap /mnt \
     base \
     base-devel \
