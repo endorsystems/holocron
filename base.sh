@@ -126,6 +126,7 @@ pacstrap /mnt \
     sane \
     xsane \
     virtualbox \
+    virtualbox-guest-iso \
     docker \
     docker-compose \
     vagrant \
@@ -182,13 +183,13 @@ pacstrap /mnt \
     flashplugin
 
 # System Configuration
-genfstab /mnt >> /mnt/etc/fstab
+genfstab /mnt > /mnt/etc/fstab
 arch-chroot /mnt echo "${hostname}" > /mnt/etc/hostname
 arch-chroot /mnt sed -i 's/#\(en_US\.UTF-8\)/\1/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 arch-chroot /mnt echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
-arch-chroot /mnt useradd -mU -s /bin/bash -G wheel "${sudo_user}"
+arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel "${sudo_user}"
 
 # File changes
 # mdns_minimal [NOTFOUND=return] ...
@@ -245,8 +246,12 @@ EOF
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 
 # Changing passwords
-echo "${root_pass}\n${root_pass}" | passwd --root /mnt root
-echo "${sudo_user_pass}\n${sudo_user_pass}" | passwd --root /mnt ${sudo_user}
+echo root:${root_pass} | chpasswd
+echo ${sudo_user}:${sudo_user_pass} | chpasswd
+
+# OLD
+# echo "${root_pass}\n${root_pass}" | passwd --root /mnt root
+# echo "${sudo_user_pass}\n${sudo_user_pass}" | passwd --root /mnt ${sudo_user}
 
 # Systemd enables
 arch-chroot /mnt systemctl enable sshd
@@ -257,13 +262,14 @@ arch-chroot /mnt systemctl enable docker
 arch-chroot /mnt systemctl enable ufw.service
 
 # Bootloader
-# TODO: looking at EFI, but defaulting to GRUB
-
-# GRUB / MBR - Basic install (No EFI) #
-arch-chroot /mnt grub-install ${disk}
-arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+# EFISTUB install
+efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
+arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
 
 ## Start post config ##
 
 # AUR installer
 #source aur.sh
+
+# Git configs
+#source post_setup.sh
