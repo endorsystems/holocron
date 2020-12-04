@@ -8,15 +8,15 @@
 # echo "Laptop or VM / Desktop?"
 # read device_type
 
-echo "#######################"
-echo "### Welcome to Holocron"
-echo "#######################"
-echo " "
+echo "###########################"
+echo "### Welcome to Holocron ###"
+echo "###########################"
+echo ""
 
 # Hostname
 echo "Please type in the desired hostname."
 read hostname
-echo " "
+echo ""
 
 # Sudoer
 echo "Please enter the name of the super user."
@@ -26,17 +26,18 @@ echo " "
 # Sudoer password
 echo "Please enter the password for the super user."
 read -s sudo_user_pass
-echo " "
+echo ""
 
 # Root pw
 echo "Please type the password for the root user."
 read -s root_pass
-echo " "
+echo ""
 
 # Disk Selection
 echo `lsblk | grep disk`
 echo "Please select from the above disks to use for installation. Make sure its full path '/dev/sda'" 
 read disk
+echo ""
 if [ -z "$disk" ]
 then
       echo "No disk selected, please restart the script."
@@ -87,10 +88,11 @@ read repo_url
 if [ -z "$repo_url" ]
 then
     echo "No Repo selected, using defaults."
+    echo ""
 else
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
     echo "Server = http://${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-    echo "Server added, updating repo..."\n
+    echo "Server added, updating repo..."
     pacman -Sy
 fi
 
