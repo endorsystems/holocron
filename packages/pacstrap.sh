@@ -76,6 +76,7 @@ pacstrap /mnt \
     zsh \
     sway \
     swaylock \
+    swayidle \
     mako \
     wofi \
     waybar \
