@@ -8,6 +8,11 @@
 # echo "Laptop or VM / Desktop?"
 # read device_type
 
+echo "#######################"
+echo "### Welcome to Holocron"
+echo "#######################"
+echo " "
+
 # Hostname
 echo "Please type in the desired hostname."
 read hostname
@@ -148,9 +153,11 @@ pacstrap /mnt \
     lvm2 \
     grub \
     zsh \
-    i3 \
-    rofi \
-    dunst \
+    sway \
+    swaylock \
+    mako \
+    wofi \
+    waybar \
     alacritty \
     os-prober \
     efibootmgr \
@@ -200,8 +207,13 @@ EOF
 arch-chroot /mnt ufw default deny
 arch-chroot /mnt ufw enable
 
+# SSH server is disabled by default but if its enabled, use rate limiting.
+# ufw limit SSH
+
 ## VPN settings
 # TODO: get DEFAULT_FORWARD_POLICY from DROP to ACCEPT
+# sed -i 's/'
+
 
 ## Samba
 cat <<EOF > /mnt/etc/ufw/applications.d/samba
