@@ -11,7 +11,7 @@
 # Hostname
 echo "Please type in the desired hostname."
 read hostname
-echo "\n"
+echo "###################"
 
 # Sudoer
 echo "Please enter the name of the super user."
