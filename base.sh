@@ -47,6 +47,10 @@ read -p "Are you sure? THIS WILL DELETE ALL DATA FROM THE SELECTED DISK! (Yes or
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    # Unmount just in case
+    umount ${disk}{1..2}
+    # Wipe with DD
+    dd if=/dev/zero of=${disk} bs=1M count=3000
     # Disk partitioning.
     parted --script "${disk}" -- mklabel gpt \
     mkpart ESP fat32 1Mib 513MiB \
@@ -273,3 +277,6 @@ arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux
 
 # Git configs
 #source post_setup.sh
+
+# Unmount partitions
+umount /dev/sda{1..2}
