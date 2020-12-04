@@ -13,6 +13,11 @@ echo "### Welcome to Holocron ###"
 echo "###########################"
 echo ""
 
+# Device type (laptop, VM, desktop)
+# TODO: Create use cases for this.
+# echo "Input the type of device. (Laptop, VM, Desktop)"
+# read device_type
+
 # Hostname
 echo "Please type in the desired hostname."
 read hostname
@@ -101,90 +106,8 @@ else
 fi
 
 # Package installation
-# packages=`source vars/laptop_packages`
-pacstrap /mnt \
-    base \
-    base-devel \
-    linux \
-    linux-firmware \
-    linux-headers \
-    device-mapper \
-    man-db \
-    man-pages \
-    python \
-    python-pip \
-    vim \
-    diffutils \
-    xfsprogs \
-    e2fsprogs \
-    sysfsutils \
-    usbutils \
-    inetutils \
-    networkmanager \
-    network-manager-applet \
-    nm-connection-editor \
-    cups \
-    cups-pdf \
-    nss-mdns \
-    avahi \
-    sane \
-    xsane \
-    virtualbox \
-    virtualbox-guest-iso \
-    docker \
-    docker-compose \
-    vagrant \
-    minikube \
-    alsa \
-    pulseaudio \
-    pulseaudio-alsa \
-    pulseaudio-bluetooth \
-    pulseaudio-equalizer \
-    pulsemixer \
-    playerctl \
-    chromium \
-    samba \
-    ufw \
-    duplicity \
-    git \
-    openssh \
-    ttf-dejavu \
-    ttf-hack \
-    ttf-liberation \
-    noto-fonts \
-    rsync \
-    neofetch \
-    gnome-calculator \
-    caprine \
-    eog \
-    tmux \
-    thunar \
-    tumbler \
-    grim \
-    dmidecode \
-    libreoffice-fresh \
-    evince \
-    poppler \
-    code \
-    ncdu \
-    wget \
-    curl \
-    hwinfo \
-    mako \
-    cryptsetup \
-    lvm2 \
-    grub \
-    zsh \
-    sway \
-    swaylock \
-    mako \
-    wofi \
-    waybar \
-    alacritty \
-    os-prober \
-    efibootmgr \
-    libva-intel-driver \
-    flashplugin
+# TODO: Possible package selection of some sort for extras?
+source packages/pacstrap.sh
 
 # System Configuration
 genfstab /mnt > /mnt/etc/fstab
