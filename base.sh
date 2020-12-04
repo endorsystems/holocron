@@ -11,19 +11,22 @@
 # Hostname
 echo "Please type in the desired hostname."
 read hostname
-echo "###################"
+echo " "
 
 # Sudoer
 echo "Please enter the name of the super user."
 read sudo_user
+echo " "
 
 # Sudoer password
 echo "Please enter the password for the super user."
 read -s sudo_user_pass
+echo " "
 
 # Root pw
 echo "Please type the password for the root user."
 read -s root_pass
+echo " "
 
 # Disk Selection
 echo `lsblk | grep disk`
