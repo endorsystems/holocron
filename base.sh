@@ -246,8 +246,8 @@ EOF
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 
 # Changing passwords
-echo root:${root_pass} | chpasswd
-echo ${sudo_user}:${sudo_user_pass} | chpasswd
+echo root:${root_pass} | chpasswd --root /mnt
+echo ${sudo_user}:${sudo_user_pass} | chpasswd --root /mnt
 
 # OLD
 # echo "${root_pass}\n${root_pass}" | passwd --root /mnt root
