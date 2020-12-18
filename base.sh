@@ -38,48 +38,48 @@ echo "Please type the password for the root user."
 read -s root_pass
 echo ""
 
-# Disk Selection
-echo `lsblk | grep disk`
-echo "Please select from the above disks to use for installation. Make sure its full path '/dev/sda'" 
-read disk
-echo ""
-if [ -z "$disk" ]
-then
-      echo "No disk selected, please restart the script."
-      exit 1
-fi
-read -p "Are you sure? THIS WILL DELETE ALL DATA FROM THE SELECTED DISK! (Yes or No)" -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    # Unmount just in case
-    umount ${disk}{1..2}
-    # Wipe with DD
-    dd if=/dev/zero of=${disk} bs=1M count=3000
-    # Disk partitioning.
-    parted --script "${disk}" -- mklabel gpt \
-    mkpart ESP fat32 1Mib 513MiB \
-    set 1 boot on \
-    mkpart primary xfs 513MiB 100%
-else
-    exit 2
-fi
+# # Disk Selection
+# echo `lsblk | grep disk`
+# echo "Please select from the above disks to use for installation. Make sure its full path '/dev/sda'" 
+# read disk
+# echo ""
+# if [ -z "$disk" ]
+# then
+#       echo "No disk selected, please restart the script."
+#       exit 1
+# fi
+# read -p "Are you sure? THIS WILL DELETE ALL DATA FROM THE SELECTED DISK! (Yes or No)" -n 1 -r
+# echo
+# if [[ $REPLY =~ ^[Yy]$ ]]
+# then
+#     # Unmount just in case
+#     umount ${disk}{1..2}
+#     # Wipe with DD
+#     dd if=/dev/zero of=${disk} bs=1M count=3000
+#     # Disk partitioning.
+#     parted --script "${disk}" -- mklabel gpt \
+#     mkpart ESP fat32 1Mib 513MiB \
+#     set 1 boot on \
+#     mkpart primary xfs 513MiB 100%
+# else
+#     exit 2
+# fi
 
-# vars
-# TODO: look into why this isn't showing the right var
-# part_boot="$(lsblk ${disk}* | grep -E "^${disk}p?1$")"
-# part_root="$(lsblk ${disk}* | grep -E "^${disk}p?2$")"
+# # vars
+# # TODO: look into why this isn't showing the right var
+# # part_boot="$(lsblk ${disk}* | grep -E "^${disk}p?1$")"
+# # part_root="$(lsblk ${disk}* | grep -E "^${disk}p?2$")"
 
-# TODO: encryption...
+# # TODO: encryption...
 
-# Formatting
-mkfs.fat -F32 "${disk}1"
-mkfs.xfs -f "${disk}2"
+# # Formatting
+# mkfs.fat -F32 "${disk}1"
+# mkfs.xfs -f "${disk}2"
 
-# Mounting
-mount "${disk}2" /mnt
-mkdir /mnt/boot
-mount "${disk}1" /mnt/boot
+# # Mounting
+# mount "${disk}2" /mnt
+# mkdir /mnt/boot
+# mount "${disk}1" /mnt/boot
 
 ## Using templates for either laptop or desktop.
 # Package template
