@@ -89,20 +89,37 @@ mount "${disk}1" /mnt/boot
 #     # Laptop Template
 # fi
 
-# Local repo?
-echo "Please enter a local repo IP. Blank will default to basic public."
-echo "Example: 10.0.0.3"
-read repo_url
+# Choice for local network mirror or local usb repo
+# Repos will be mounted at /media/archlinux
+echo "Would you like to use a local filesystem?"
+read local_fs
 
-if [ -z "$repo_url" ]
+if [ -z "$local_fs" ]
 then
-    echo "No Repo selected, using defaults."
-    echo ""
+# local FS repo
+    echo "Using local filesystem repo mounted at /media/archlinux"
+    if grep -qs '/media/' /proc/mounts; then
+        echo "Server = file:///media/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+    else
+        echo "No drive mounted to /media, moving on with defaults..."
+    fi
 else
-    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-    echo "Server = http://${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-    echo "Server added, updating repo..."
-    pacman -Sy
+    echo "No was selected. Checking for local network mirror"
+# Local network repo
+    echo "Please enter a local repo IP. Blank will default to basic public."
+    echo "Example: 10.0.0.3"
+    read repo_url
+
+    if [ -z "$repo_url" ]
+    then
+        echo "No Repo selected, using defaults."
+        echo ""
+    else
+        cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+        echo "Server = http://${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
+        echo "Server added, updating repo..."
+        pacman -Sy
+    fi
 fi
 
 # Package installation
