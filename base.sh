@@ -94,7 +94,7 @@ echo ""
 echo "Would you like to use a local filesystem?"
 read local_fs
 
-if [ -z "$local_fs" ]
+ if [[ $REPLY =~ ^[Yy]$ ]]
 then
 # local FS repo
     echo "Using local filesystem repo mounted at /media/archlinux"
