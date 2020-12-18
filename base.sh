@@ -124,7 +124,7 @@ echo ""
 
 # Package installation
 # TODO: Possible package selection of some sort for extras?
-source packages/pacstrap.sh
+# source packages/pacstrap.sh
 
 # System Configuration
 genfstab -U /mnt > /mnt/etc/fstab
