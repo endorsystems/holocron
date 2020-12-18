@@ -26,14 +26,6 @@ pacstrap /mnt \
     cups-pdf \
     nss-mdns \
     avahi \
-    sane \
-    xsane \
-    virtualbox \
-    virtualbox-guest-iso \
-    docker \
-    docker-compose \
-    vagrant \
-    minikube \
     alsa \
     pulseaudio \
     pulseaudio-alsa \
@@ -44,39 +36,23 @@ pacstrap /mnt \
     bluez-utils \
     blueman \
     playerctl \
-    chromium \
     samba \
     ufw \
     duplicity \
     git \
     openssh \
-    ttf-dejavu \
-    ttf-hack \
-    ttf-liberation \
-    noto-fonts \
     rsync \
     neofetch \
-    gnome-calculator \
-    caprine \
-    eog \
-    tmux \
-    thunar \
-    tumbler \
-    grim \
     dmidecode \
-    libreoffice-fresh \
-    evince \
-    poppler \
-    code \
     ncdu \
     wget \
     curl \
     hwinfo \
-    mako \
     cryptsetup \
     lvm2 \
-    grub \
     zsh \
+    efibootmgr \
+# Packages extra / gui #
     sway \
     swaylock \
     swayidle \
@@ -85,7 +61,22 @@ pacstrap /mnt \
     htop \
     waybar \
     alacritty \
-    os-prober \
-    efibootmgr \
-    libva-intel-driver \
-    flashplugin
+    mako \
+    ttf-dejavu \
+    ttf-hack \
+    ttf-liberation \
+    noto-fonts \
+    flashplugin \
+    chromium \
+    virtualbox \
+    virtualbox-guest-iso \
+    docker \
+    docker-compose \
+    vagrant \
+    minikube \
+    code \
+    libreoffice-fresh \
+    grim \
+    tmux \
+    caprine \
+    ranger    
