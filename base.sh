@@ -110,7 +110,7 @@ fi
 source packages/pacstrap.sh
 
 # System Configuration
-genfstab /mnt > /mnt/etc/fstab
+genfstab -U /mnt > /mnt/etc/fstab
 arch-chroot /mnt echo "${hostname}" > /mnt/etc/hostname
 arch-chroot /mnt sed -i 's/#\(en_US\.UTF-8\)/\1/' /etc/locale.gen
 arch-chroot /mnt locale-gen
@@ -157,17 +157,17 @@ arch-chroot /mnt ufw enable
 
 ## VPN settings
 # TODO: get DEFAULT_FORWARD_POLICY from DROP to ACCEPT
-# sed -i 's/'
-
+# Not sure this is needed because with ufw enabled and on VPN with no issues.
 
 ## Samba
-cat <<EOF > /mnt/etc/ufw/applications.d/samba
-[samba]
-title=LanManager-like file and printer server for Unix
-description=The Samba software suite is a collection of programs that implements the SMB/CIFS protocol for unix systems, allowing you to serve 
-files and printers to Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred to as the LanManager or NetBIOS protocol.
-ports=137,138/udp|139,445/tcp
-EOF
+# TODO: there is an issue with this: 'WARN: Skipping 'samba': couldn't process'
+# cat <<EOF > /mnt/etc/ufw/applications.d/samba
+# [samba]
+# title=LanManager-like file and printer server for Unix
+# description=The Samba software suite is a collection of programs that implements the SMB/CIFS protocol for unix systems, allowing you to serve 
+# files and printers to Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred to as the LanManager or NetBIOS protocol.
+# ports=137,138/udp|139,445/tcp
+# EOF
 
 # User permissions
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}

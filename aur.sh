@@ -8,8 +8,12 @@ mkdir -p $HOME/.aur/
 ## Used to get aur packages installed during ISO install.
 # TODO: create list of scripted installs for each
 
-# Polybar?
-git clone https://aur.archlinux.org/polybar.git $HOME/.aur/polybar
+# pikaur
+git clone https://aur.archlinux.org/pikaur.git
+cd pikaur
+makepkg -si
 
-# RocketChat?
-git clone https://aur.archlinux.org/rocketchat-desktop.git $HOME/.aur/rocketchat-desktop
+# install packages
+pikaur -Sy \
+    teams \
+    

@@ -40,6 +40,9 @@ pacstrap /mnt \
     pulseaudio-bluetooth \
     pulseaudio-equalizer \
     pulsemixer \
+    bluez \
+    bluez-utils \
+    blueman \
     playerctl \
     chromium \
     samba \
@@ -79,6 +82,7 @@ pacstrap /mnt \
     swayidle \
     mako \
     wofi \
+    htop \
     waybar \
     alacritty \
     os-prober \
