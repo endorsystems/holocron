@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### CONFIG VARS ###
-# TODO: Put this in a post-condif section?
+# TODO: Put this in a post-condif section? Also need to create escape theads for each question.
 # hostname
 hostname=$(whiptail --inputbox "Please type the requested hostname." 8 39  --title "Hostname" 3>&1 1>&2 2>&3)
 exitstatus=$?
