@@ -73,7 +73,23 @@ mount "${part_root}" /mnt
 mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
 
-### REPO SELECTION ###
+### REPO SETUP ###
+# TODO: Create an updated repo selection.
+# Repo selection will include an offline USB selection, Local network mirror, default mirror.
+
+# Input box for repo selection
+repo_url=$(whiptail --inputbox "Please type your desired repo url.\nExample:\nLocalfile: file:///media/archlinux/\nLocal Network: http://<IP>/archlinux/\nCancel for default." 11 70  --title "Repo Selection" 3>&1 1>&2 2>&3)
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+    # Backup old repo
+    cp /etc/pacman.d/mirrorlist ~/
+    # Install Selected repo
+    echo "Server = ${repo_url}/\$repo/os/\$arch/" > /etc/pacman.d/mirrorlist
+    # Update pacman cache
+    pacman -Sy
+else
+    echo "User Canceled. Using default settings."
+fi
 
 ### PACKAGE INSTALL ###
 # Using a base install to get the system ready, then a Ansible will be used.
@@ -195,12 +211,6 @@ efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'`
 arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
 
 ## Start post config ##
-
-# AUR installer
-#source aur.sh
-
-# Git configs
-#source post_setup.sh
 
 # Unmount partitions
 umount /dev/sda{1..2}
