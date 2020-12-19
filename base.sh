@@ -8,9 +8,9 @@
 # echo "Laptop or VM / Desktop?"
 # read device_type
 
-echo "###########################"
+echo "#######################"
 echo "### Welcome to Holocron ###"
-echo "###########################"
+echo "#######################"
 echo ""
 
 # Device type (laptop, VM, desktop)
@@ -38,93 +38,77 @@ echo "Please type the password for the root user."
 read -s root_pass
 echo ""
 
+### Set up logging ###
+exec 1> >(tee "stdout.log")
+exec 2> >(tee "stderr.log")
+
+### Time settings ###
+timedatectl set-ntp true
+
 # # Disk Selection
-# echo `lsblk | grep disk`
-# echo "Please select from the above disks to use for installation. Make sure its full path '/dev/sda'" 
-# read disk
-# echo ""
-# if [ -z "$disk" ]
-# then
-#       echo "No disk selected, please restart the script."
-#       exit 1
-# fi
-# read -p "Are you sure? THIS WILL DELETE ALL DATA FROM THE SELECTED DISK! (Yes or No)" -n 1 -r
-# echo
-# if [[ $REPLY =~ ^[Yy]$ ]]
-# then
-#     # Unmount just in case
-#     umount ${disk}{1..2}
-#     # Wipe with DD
-#     dd if=/dev/zero of=${disk} bs=1M count=3000
-#     # Disk partitioning.
-#     parted --script "${disk}" -- mklabel gpt \
-#     mkpart ESP fat32 1Mib 513MiB \
-#     set 1 boot on \
-#     mkpart primary xfs 513MiB 100%
-# else
-#     exit 2
-# fi
+items=$(lsblk -d -p -n -l -o NAME,SIZE -e 7,11)
+options=()
+IFS_ORIG=$IFS
+IFS=$'\n'
+for item in ${items}
+do  
+        options+=("${item}" "")
+done
+IFS=$IFS_ORIG
+disk=$(whiptail --backtitle "${APPTITLE}" --title "${1}" --menu "" 0 0 0 "${options[@]}" 3>&1 1>&2 2>&3)
+if [ "$?" != "0" ]
+then
+        return 1
+fi
 
-# # vars
-# # TODO: look into why this isn't showing the right var
-# # part_boot="$(lsblk ${disk}* | grep -E "^${disk}p?1$")"
-# # part_root="$(lsblk ${disk}* | grep -E "^${disk}p?2$")"
-
-# # TODO: encryption...
+part_boot="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?1$")"
+part_root="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?2$")"
 
 # # Formatting
-# mkfs.fat -F32 "${disk}1"
-# mkfs.xfs -f "${disk}2"
+mkfs.fat -F32 "${part_boot}"
+mkfs.xfs -f "${part_root}"
 
 # # Mounting
-# mount "${disk}2" /mnt
-# mkdir /mnt/boot
-# mount "${disk}1" /mnt/boot
+mount "${part_root}" /mnt
+mkdir /mnt/boot
+mount "${part_boot}" /mnt/boot
 
-## Using templates for either laptop or desktop.
-# Package template
-# TODO: check this template system out, for now default packages for laptop
-# if [[ $device_type == "laptop" ]]
-# then
-#     # Laptop Template
-# fi
+### REPO SELECTION ###
 
-# Choice for local network mirror or local usb repo
-# Repos will be mounted at /media/archlinux
-# echo "Would you like to use a local filesystem?"
-# read local_fs
+### PACKAGE INSTALL ###
+# Using a base install to get the system ready, then a Ansible will be used.
+# This will allow the user more accurate selection of items.
 
-#  if [[ $REPLY =~ ^[Yy]$ ]]
-# then
-# # local FS repo
-#     echo "Using local filesystem repo mounted at /media/archlinux"
-#     if grep -qs '/media/' /proc/mounts; then
-#         echo "Server = file:///media/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-#     else
-#         echo "No drive mounted to /media, moving on with defaults..."
-#     fi
-# else
-#     echo "No was selected. Checking for local network mirror"
-# # Local network repo
-#     echo "Please enter a local repo IP. Blank will default to basic public."
-#     echo "Example: 10.0.0.3"
-#     read repo_url
-
-#     if [ -z "$repo_url" ]
-#     then
-#         echo "No Repo selected, using defaults."
-#         echo ""
-#     else
-#         cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
-#         echo "Server = http://${repo_url}/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
-#         echo "Server added, updating repo..."
-#         pacman -Sy
-#     fi
-# fi
-
-# Package installation
-# TODO: Possible package selection of some sort for extras?
-# source packages/pacstrap.sh
+pacstrap /mnt \
+    base \
+    base-devel \
+    linux \
+    linux-firmware \
+    linux-headers \
+    device-mapper \
+    man-db \
+    man-pages \
+    python \
+    python-pip \
+    vim \
+    diffutils \
+    xfsprogs \
+    e2fsprogs \
+    sysfsutils \
+    usbutils \
+    inetutils \
+    ufw \
+    git \
+    openssh \
+    rsync \
+    dmidecode \
+    wget \
+    curl \
+    hwinfo \
+    zsh \
+    efibootmgr \
+    grub \
+    os-prober
 
 # System Configuration
 genfstab -U /mnt > /mnt/etc/fstab
