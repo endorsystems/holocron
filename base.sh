@@ -137,6 +137,7 @@ arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel "${sudo_user}"
 
 # File changes
 # mdns_minimal [NOTFOUND=return] ...
+
 # Font config
 arch-chroot /mnt ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
 arch-chroot /mnt ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
@@ -176,16 +177,6 @@ arch-chroot /mnt ufw enable
 # TODO: get DEFAULT_FORWARD_POLICY from DROP to ACCEPT
 # Not sure this is needed because with ufw enabled and on VPN with no issues.
 
-## Samba
-# TODO: there is an issue with this: 'WARN: Skipping 'samba': couldn't process'
-# cat <<EOF > /mnt/etc/ufw/applications.d/samba
-# [samba]
-# title=LanManager-like file and printer server for Unix
-# description=The Samba software suite is a collection of programs that implements the SMB/CIFS protocol for unix systems, allowing you to serve 
-# files and printers to Windows, NT, OS/2 and DOS clients. This protocol is sometimes also referred to as the LanManager or NetBIOS protocol.
-# ports=137,138/udp|139,445/tcp
-# EOF
-
 # User permissions
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 
@@ -199,7 +190,6 @@ echo ${sudo_user}:${sudo_user_pass} | chpasswd --root /mnt
 
 # Systemd enables
 arch-chroot /mnt systemctl enable sshd
-arch-chroot /mnt systemctl enable NetworkManager
 arch-chroot /mnt systemctl enable avahi-daemon.service
 arch-chroot /mnt systemctl enable cups.service
 arch-chroot /mnt systemctl enable docker
