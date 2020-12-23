@@ -38,3 +38,30 @@ if [ $exitstatus = 0 ]; then
 else
     echo "User Canceled."
 fi
+
+## OLD SCRIPT
+
+# # Device type (laptop, VM, desktop)
+# # TODO: Create use cases for this.
+# # echo "Input the type of device. (Laptop, VM, Desktop)"
+# # read device_type
+
+# # Hostname
+# echo "Please type in the desired hostname."
+# read hostname
+# echo ""
+
+# # Sudoer
+# echo "Please enter the name of the super user."
+# read sudo_user
+# echo " "
+
+# # Sudoer password
+# echo "Please enter the password for the super user."
+# read -s sudo_user_pass
+# echo ""
+
+# # Root pw
+# echo "Please type the password for the root user."
+# read -s root_pass
+# echo ""
