@@ -88,8 +88,6 @@ mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
 
 ### REPO SETUP ###
-# TODO: Create an updated repo selection.
-# Repo selection will include an offline USB selection, Local network mirror, default mirror.
 
 # Input box for repo selection
 repo_url=$(whiptail --inputbox "Please type your desired repo url.\nExample:\nLocalfile: file:///media/archlinux/\nLocal Network: http://<IP>/archlinux/\nCancel for default." 11 70  --title "Repo Selection" 3>&1 1>&2 2>&3)
@@ -184,7 +182,7 @@ EOF
 arch-chroot /mnt ufw default deny
 arch-chroot /mnt ufw enable
 
-# SSH server is disabled by default but if its enabled, use rate limiting.
+# SSH is disabled by default but if its enabled, use rate limiting.
 # ufw limit SSH
 
 ## VPN settings
@@ -197,10 +195,6 @@ echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
 # Changing passwords
 echo root:${root_pass} | chpasswd --root /mnt
 echo ${sudo_user}:${sudo_user_pass} | chpasswd --root /mnt
-
-# OLD
-# echo "${root_pass}\n${root_pass}" | passwd --root /mnt root
-# echo "${sudo_user_pass}\n${sudo_user_pass}" | passwd --root /mnt ${sudo_user}
 
 # Systemd enables
 # arch-chroot /mnt systemctl enable sshd
@@ -215,6 +209,8 @@ efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'`
 arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
 
 ## Start post config ##
+# TODO: Insert scripts to be run at login? Or maunal executions?
 
 # Unmount partitions
-umount /dev/sda{1..2}
+umount ${part_boot}
+umount ${part_root}
