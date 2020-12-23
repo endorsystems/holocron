@@ -75,14 +75,21 @@ then
     return 1
 fi
 
+# Create partitions
+parted --script "${disk}" -- mklabel gpt \
+  mkpart ESP fat32 1Mib 513MiB \
+  set 1 boot on \
+  mkpart primary xfs 513MiB 100%
+
+# Assign vars to partitions
 part_boot="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?1$")"
 part_root="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?2$")"
 
-# # Formatting
+# Formatting
 mkfs.fat -F32 "${part_boot}"
 mkfs.xfs -f "${part_root}"
 
-# # Mounting
+# Mounting
 mount "${part_root}" /mnt
 mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
@@ -102,6 +109,9 @@ if [ $exitstatus = 0 ]; then
 else
     echo "User Canceled. Using default settings."
 fi
+
+# TODO: create partition verification prior to installation.
+# this prevents the script from free running.
 
 ### PACKAGE INSTALL ###
 # Using a base install to get the system ready, then a Ansible will be used.
