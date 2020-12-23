@@ -76,7 +76,7 @@ then
 fi
 
 # Create partitions
-parted --script "${disk}" -- mklabel gpt \
+parted --script "${disk%%\ *}" -- mklabel gpt \
   mkpart ESP fat32 1Mib 513MiB \
   set 1 boot on \
   mkpart primary xfs 513MiB 100%
