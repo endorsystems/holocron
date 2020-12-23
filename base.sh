@@ -145,7 +145,7 @@ arch-chroot /mnt sed -i 's/#\(en_US\.UTF-8\)/\1/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 arch-chroot /mnt echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
-arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel "${sudo_user}"
+arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,docker "${sudo_user}"
 
 # File changes
 # mdns_minimal [NOTFOUND=return] ...
@@ -211,6 +211,8 @@ arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
 
+### Reboot ###
+# TODO: create section for reboot questions.
 # Unmount partitions
 umount ${part_boot}
 umount ${part_root}
