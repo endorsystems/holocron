@@ -160,33 +160,6 @@ arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,docker "${sudo_user}"
 # File changes
 # mdns_minimal [NOTFOUND=return] ...
 
-# Font config
-arch-chroot /mnt ln -s /etc/fonts/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d
-arch-chroot /mnt ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
-arch-chroot /mnt ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
-sed -i "/FREETYPE_PROPERTIES/s/^#//g" /mnt/etc/profile.d/freetype2.sh
-cat <<EOF > /mnt/etc/fonts/local.conf 
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-    <match>
-        <edit mode="prepend" name="family"><string>Noto Sans</string></edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family"><string>serif</string></test>
-        <edit name="family" mode="assign" binding="same"><string>Noto Serif</string></edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family"><string>sans-serif</string></test>
-        <edit name="family" mode="assign" binding="same"><string>Noto Sans</string></edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family"><string>monospace</string></test>
-        <edit name="family" mode="assign" binding="same"><string>Noto Mono</string></edit>
-    </match>
-</fontconfig>
-EOF
-
 # Firewall Rules
 ## Defaults
 arch-chroot /mnt ufw default deny
@@ -208,9 +181,6 @@ echo ${sudo_user}:${sudo_user_pass} | chpasswd --root /mnt
 
 # Systemd enables
 # arch-chroot /mnt systemctl enable sshd
-arch-chroot /mnt systemctl enable avahi-daemon.service
-arch-chroot /mnt systemctl enable cups.service
-arch-chroot /mnt systemctl enable docker
 arch-chroot /mnt systemctl enable ufw.service
 
 # Bootloader

@@ -1,0 +1,52 @@
+---
+default-font: noto-fonts
+required-packages:
+  - i3
+  - rofi
+  - dunst
+  - cups
+  - cups-pdf
+  - avahi
+  - mdns
+  - docker
+  - docker-compose
+  - vagrant
+  - virtualbox
+  - virtualbox-guest-utils
+  - minikube
+  - alsa
+  - pulseaudio
+  - pulseaudio-alsa
+  - pulseaudio-bluetooth
+  - pulseaudio-equalizer
+  - pulsemixer
+  - playerctl
+  - samba
+  - ttf-dejavu
+  - ttf-libertarian
+  - noto-fonts
+  - neofetch
+  - caprine
+  - picom
+  - tmux
+  - grim
+  - libreoffice-fresh
+  - code
+  - networkmanager
+  - network-manager-applet
+  - nm-connection-editor
+  - sane
+  - thunar
+# Do I want these?
+  # - tumbler
+  # - evince
+  # - poppler
+  # - ncdu
+  # - duplicity
+
+
+enabled-services:
+  - cupds
+  - avahi-daemon
+  - ufw
+
