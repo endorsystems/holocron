@@ -43,8 +43,8 @@ required_aur:
   - polybar
 
 enabled_services:
-  - cupds
-  - avahi-daemon
-  - ufw
+  - cupsd
+  - avahi-daemon.service
+  
   
 
