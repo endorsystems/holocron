@@ -2,13 +2,13 @@
 - hosts: localhost
   become: yes
 
-- roles:
+  roles:
     - kewlfft.aur
 
-- vars_files:
+  vars_files:
     - vars/main.yml
 
-- tasks:
+  tasks:
     name: Install all required packages
     community.general.pacman:
         name: '{{ item }}'
