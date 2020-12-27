@@ -57,13 +57,13 @@
 
   - name: Create bitmap symlinks
     file:
-        src: '{{ item }}'
-        dest: "/etc/fonts/conf.d"
+        src: "/etc/fonts/conf.avail/{{ item }}"
+        dest: "/etc/fonts/conf.d/{{ item }}"
         state: link
     with_items:
-        - /etc/fonts/conf.avail/70-no-bitmaps.conf
-        - /etc/fonts/conf.avail/10-sub-pixel-rgb.conf
-        - /etc/fonts/conf.avail/11-lcdfilter-default.conf
+        - 70-no-bitmaps.conf
+        - 10-sub-pixel-rgb.conf
+        - 11-lcdfilter-default.conf
 
   - name: Enable freetype properties
     replace:
