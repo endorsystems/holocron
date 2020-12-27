@@ -6,7 +6,7 @@ TODO:
 -- Add Ansible to the ISO to help with post config
 
 ## Post Config
-TBD
+Ansible based. Requires: ansible-galaxy install kewlfft.aur
 
 ## Credits
 I believe credit where credit is due, it also helps other people understand whats in there. Here are the sources for my thought process on this.
