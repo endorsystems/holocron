@@ -53,6 +53,7 @@
                     <edit name="family" mode="assign" binding="same"><string>{{ monospace_font }}</string></edit>
                 </match>
             </fontconfig>
+        create: yes
 
   - name: Create bitmap symlinks
     file:
