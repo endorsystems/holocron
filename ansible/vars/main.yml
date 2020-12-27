@@ -1,6 +1,4 @@
 ---
-dots_location: /home/sean/dotfiles
-xdg_location: /home/sean
 dots_url: https://github.com/endorsystems/dotfiles.git
 serif_font: Noto Serif
 sans_serif_font: Noto Sans

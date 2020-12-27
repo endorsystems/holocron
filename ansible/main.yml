@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: yes
+  become: no
 
   roles:
     - kewlfft.aur
@@ -14,19 +14,20 @@
         name: '{{ item }}'
         state: present
     with_items: '{{ required_packages }}'
+    become: yes
 
   - name: Install AUR packages
     aur:
         name: '{{ item }}'
         state: present
     with_items: '{{ required_aur }}'
-    become: no
 
   - name: Setup nsswitch.conf
     copy:
         src: files/nsswitch.conf
         dest: /etc/nsswitch.conf
         backup: yes
+    become: yes
     notify: restart_avahi
     
   - name: Setup fonts
@@ -53,12 +54,14 @@
                 </match>
             </fontconfig>
         create: yes
+    become: yes
 
   - name: Create bitmap symlinks
     file:
         src: "/etc/fonts/conf.avail/{{ item }}"
         dest: "/etc/fonts/conf.d/{{ item }}"
         state: link
+    become: yes
     with_items:
         - 70-no-bitmaps.conf
         - 10-sub-pixel-rgb.conf
@@ -69,42 +72,36 @@
       path: /etc/profile.d/freetype2.sh
       regexp: '^#(.*FREETYPE_PROPERTIES.*)'
       replace: '\1'
+    become: yes
 
   - name: Enable systemd stuff
     systemd:
         name: '{{ item }}'
         state: started
         enabled: yes
+    become: yes
     with_items: '{{ enabled_services }}'
 
   - name: User mods
     user:
-        name: sean
+        name: '{{ ansible_user_id }}'
         groups: docker
         append: yes
+    become: yes
 
   - name: Download dotfiles
     git:
         repo: '{{ dots_url }}'
-        dest: '{{ dots_location }}'
+        dest: '{{ ansible_user_dir }}/dotfiles'
         update: yes
-    become: no
 
   - name: Install dotfiles
     file:
-        src: "{{ dots_location }}/{{ item.src }}"
-        dest: "{{ xdg_location }}/{{ item.dst }}"
+        src: "{{ ansible_user_dir }}/dotfiles/{{ item.src }}"
+        dest: "{{ ansible_user_dir }}/{{ item.dst }}"
         state: link
         force: yes
     with_items: '{{ dots_links }}'
-        # - { src: "bash/.bash_profile", dst: ".bash_profile" }
-        # - { src: "bash/.bashrc", dst: ".bashrc" }
-        # - { src: "dunst/dunst", dst: ".config/dunst" }
-        # - { src: "rofi/config", dst: ".config/rofi/config" }
-        # - { src: "picom/config", dst: ".config/picom.conf" }
-        # - { src: "i3/i3_config", dst: ".config/i3/config" }
-        # - { src: "i3/i3_colors", dst: ".config/i3/colors"}
-        # - { src: "polybar/polybar_config", dst: ".config/polybar/config" }
 
 # HANDLERS
   handlers:
@@ -112,3 +109,4 @@
       ansible.builtin.service:
         name: avahi-daemon
         state: restarted
+      become: yes
