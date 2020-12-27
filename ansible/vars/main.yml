@@ -39,13 +39,7 @@ required_packages:
   - nm-connection-editor
   - sane
   - thunar
-# Do I want these?
-  # - tumbler
-  # - evince
-  # - poppler
-  # - ncdu
-  # - duplicity
-
+  
 required-aur:
   - polybar
 

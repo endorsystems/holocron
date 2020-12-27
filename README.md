@@ -8,6 +8,13 @@ TODO:
 ## Post Config
 Ansible based. Requires: ansible-galaxy install kewlfft.aur
 git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
+- Questioning the following packages
+<!-- # Do I want these?
+  # - tumbler
+  # - evince
+  # - poppler
+  # - ncdu
+  # - duplicity -->
 
 
 ## Credits
