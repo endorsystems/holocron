@@ -81,3 +81,9 @@
         name: sean
         groups: docker
         append: yes
+
+  handlers:
+    - name: restart_avahi
+      ansible.builtin.service:
+        name: avahi-daemon
+        state: restarted
