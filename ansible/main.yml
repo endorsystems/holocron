@@ -97,7 +97,7 @@
         state: link
         force: yes
     with_items: '{{ dotfile_locations }}'
-        - { src: "bash/.bash_profile", dst: ".bash_profile" }
+        # - { src: "bash/.bash_profile", dst: ".bash_profile" }
         # - { src: "bash/.bashrc", dst: ".bashrc" }
         # - { src: "dunst/dunst", dst: ".config/dunst" }
         # - { src: "rofi/config", dst: ".config/rofi/config" }
