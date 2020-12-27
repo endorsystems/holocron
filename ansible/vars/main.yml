@@ -40,7 +40,7 @@ required_packages:
   - sane
   - thunar
 
-required-aur:
+required_aur:
   - polybar
 
 enabled_services:
