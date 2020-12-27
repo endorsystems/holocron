@@ -7,6 +7,8 @@ TODO:
 
 ## Post Config
 Ansible based. Requires: ansible-galaxy install kewlfft.aur
+git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
+
 
 ## Credits
 I believe credit where credit is due, it also helps other people understand whats in there. Here are the sources for my thought process on this.
