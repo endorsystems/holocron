@@ -23,10 +23,9 @@
     become: no
 
   - name: Setup nsswitch.conf
-    lineinfile:
-        path: /etc/nsswitch.conf
-        regexp: '^myhostname$'
-        line: '\1 mdns_minimal [NOTFOUND=return]'
+    copy:
+        src: files/nsswitch.conf
+        dest: /etc/nsswitch.conf
         backup: yes
     notify: restart_avahi
     

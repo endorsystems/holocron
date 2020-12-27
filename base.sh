@@ -187,6 +187,8 @@ arch-chroot /mnt systemctl enable ufw.service
 arch-chroot /mnt systemctl enable NetworkManager
 
 # Bootloader
+# TODO: figure out bootloader mess. EFISTUB isn't even working on Dell or VMware. Defaulting to grub because of this.
+# explore refined
 # EFISTUB install
 # efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
 # arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
@@ -198,12 +200,12 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
 cp -R ~/holocron /mnt/home/sean/
-git clone https://github.com/kewlfft/ansible-aur.git /mnt/home/sean/.ansible/plugins/modules/aur
-arch-chroot /mnt chown -R sean:sean /home/sean/*
+arch-chroot /mnt chown -R sean:sean /home/sean/holocron
+arch-chroot /mnt ansible-galaxy install kewlfft.aur
 
 ### Reboot ###
 # TODO: create section for reboot questions.
-
+# Ask if reboot is wanted.
 # Unmount partitions
 umount ${part_boot}
 umount ${part_root}
