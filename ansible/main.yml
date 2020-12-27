@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: true
+  become: yes
 
 - roles:
     - kewlfft.aur
@@ -26,7 +26,7 @@
         path: /etc/nsswitch.conf
         regexp: '^myhostname$'
         line: '\1 mdns_minimal [NOTFOUND=return]'
-        backup: true
+        backup: yes
     notify: restart_avahi
     
     name: Setup fonts
@@ -74,3 +74,9 @@
         name:
         state: enabled
     with_items: '{{ enabled-services }}'
+
+    name: User mods
+    user:
+        name: sean
+        groups: docker
+        append: yes
