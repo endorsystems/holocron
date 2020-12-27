@@ -3,7 +3,7 @@ serif_font: Noto Serif
 sans_serif_font: Noto Sans
 monospace_font: Noto Mono
 required_packages:
-  - i3
+  - i3-gaps
   - rofi
   - dunst
   - cups
@@ -39,7 +39,7 @@ required_packages:
   - nm-connection-editor
   - sane
   - thunar
-  
+
 required-aur:
   - polybar
 
