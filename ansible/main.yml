@@ -11,13 +11,13 @@
   tasks:
   - name: Install all required packages
     community.general.pacman:
-        name: '{{ items }}'
+        name: '{{ item }}'
         state: present
     with_items: '{{ required_packages }}'
 
   - name: Install AUR packages
     aur:
-        name: '{{ items }}'
+        name: '{{ item }}'
         state: present
     with_items: '{{ required_aur }}'
 
@@ -55,7 +55,7 @@
 
   - name: Create bitmap symlinks
     file:
-        src: '{{ items }}'
+        src: '{{ item }}'
         dest: "/etc/fonts/conf.d"
         state: link
     with_items:
