@@ -85,18 +85,18 @@
 
   - name: Download dotfiles
     git:
-        repo: '{{ dotfiles_url }}'
-        dest: "{{ srcBase }}/dotfiles"
+        repo: '{{ dots_url }}'
+        dest: '{{ dots_location }}'
         update: yes
     become: no
 
   - name: Install dotfiles
     file:
-        src: "{{ srcBase }}/dotfiles/{{ item.src }}"
-        dest: "{{ dstBase }}/{{ item.dst }}"
+        src: "{{ dots_location }}/{{ item.src }}"
+        dest: "{{ xdg_location }}/{{ item.dst }}"
         state: link
         force: yes
-    with_items: '{{ dotfile_locations }}'
+    with_items: '{{ dots_links }}'
         # - { src: "bash/.bash_profile", dst: ".bash_profile" }
         # - { src: "bash/.bashrc", dst: ".bashrc" }
         # - { src: "dunst/dunst", dst: ".config/dunst" }

@@ -1,7 +1,7 @@
 ---
-srcBase: /home/sean
-dstBase: /home/sean
-dotfiles_url: https://github.com/endorsystems/dotfiles.git
+dots_location: /home/sean/dotfiles
+xdg_location: /home/sean
+dots_url: https://github.com/endorsystems/dotfiles.git
 serif_font: Noto Serif
 sans_serif_font: Noto Sans
 monospace_font: Noto Mono
@@ -43,15 +43,12 @@ required_packages:
   - thunar
   - xorg
   - xorg-xinit
-
 required_aur:
   - polybar
-
 enabled_services:
   - cups.service
   - avahi-daemon.service
-  
-dotfile_locations:
+dots_links:
   - { src: "xfiles/.xinitrc", dst: ".xinitrc"}
   - { src: "bash/.bash_profile", dst: ".bash_profile" }
   # - { src: "bash/.bashrc", dst: ".bashrc" }
