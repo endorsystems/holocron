@@ -20,6 +20,7 @@
         name: '{{ item }}'
         state: present
     with_items: '{{ required_aur }}'
+    become: no
 
   - name: Setup nsswitch.conf
     lineinfile:

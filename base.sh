@@ -145,6 +145,7 @@ pacstrap /mnt \
     hwinfo \
     zsh \
     efibootmgr \
+    ansible \
     grub \
     os-prober
 
