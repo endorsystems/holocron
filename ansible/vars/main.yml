@@ -1,4 +1,7 @@
 ---
+srcBase: /home/sean
+dstBase: /home/sean
+dotfiles_url: https://github.com/endorsystems/dotfiles.git
 serif_font: Noto Serif
 sans_serif_font: Noto Sans
 monospace_font: Noto Mono
