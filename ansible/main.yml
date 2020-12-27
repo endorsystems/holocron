@@ -74,7 +74,8 @@
   - name: Enable systemd stuff
     systemd:
         name: '{{ item }}'
-        state: enabled
+        state: started
+        enabled: yes
     with_items: '{{ enabled_services }}'
 
   - name: User mods
