@@ -34,7 +34,6 @@ required_packages:
   - grim
   - libreoffice-fresh
   - code
-  - networkmanager
   - network-manager-applet
   - nm-connection-editor
   - sane
@@ -47,4 +46,5 @@ enabled_services:
   - cupds
   - avahi-daemon
   - ufw
+  
 

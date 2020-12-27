@@ -135,6 +135,9 @@ pacstrap /mnt \
     sysfsutils \
     usbutils \
     inetutils \
+    networkmanager \
+    network-manager-applet \
+    nm-connection-editor \
     ufw \
     git \
     openssh \
@@ -183,6 +186,7 @@ echo ${sudo_user}:${sudo_user_pass} | chpasswd --root /mnt
 # Systemd enables
 # arch-chroot /mnt systemctl enable sshd
 arch-chroot /mnt systemctl enable ufw.service
+arch-chroot /mnt systemctl enable NetworkManager
 
 # Bootloader
 # EFISTUB install
