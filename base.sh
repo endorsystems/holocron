@@ -195,6 +195,8 @@ arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
 cp -R ~/holocron /mnt/home/sean/
+git clone https://github.com/kewlfft/ansible-aur.git /mnt/home/sean/.ansible/plugins/modules/aur
+arch-chroot /mnt chown -R sean:sean /home/sean/*
 
 ### Reboot ###
 # TODO: create section for reboot questions.
