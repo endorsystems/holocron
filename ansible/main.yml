@@ -13,13 +13,13 @@
     community.general.pacman:
         name: '{{ items }}'
         state: present
-    with_items: '{{ required-packages }}'
+    with_items: '{{ required_packages }}'
 
   - name: Install AUR packages
     aur:
         name: '{{ items }}'
         state: present
-    with_items: '{{ required-aur }}'
+    with_items: '{{ required_aur }}'
 
   - name: Setup nsswitch.conf
     lineinfile:
@@ -55,7 +55,7 @@
 
   - name: Create bitmap symlinks
     file:
-        src: '{{ item }}'
+        src: '{{ items }}'
         dest: "/etc/fonts/conf.d"
         state: link
     with_items:
@@ -73,7 +73,7 @@
     service:
         name:
         state: enabled
-    with_items: '{{ enabled-services }}'
+    with_items: '{{ enabled_services }}'
 
   - name: User mods
     user:

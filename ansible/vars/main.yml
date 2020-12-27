@@ -1,6 +1,6 @@
 ---
-default-font: noto-fonts
-required-packages:
+default_font: noto-fonts
+required_packages:
   - i3
   - rofi
   - dunst
@@ -47,7 +47,7 @@ required-packages:
 required-aur:
   - polybar
 
-enabled-services:
+enabled_services:
   - cupds
   - avahi-daemon
   - ufw
