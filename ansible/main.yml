@@ -9,19 +9,19 @@
     - vars/main.yml
 
   tasks:
-    name: Install all required packages
+  - name: Install all required packages
     community.general.pacman:
         name: '{{ item }}'
         state: present
     with_items: '{{ required-packages }}'
 
-    name: Install AUR packages
+  - name: Install AUR packages
     aur:
         name: '{{ items }}'
         state: present
     with_items: '{{ required_aur }}'
 
-    name: Setup nsswitch.conf
+  - name: Setup nsswitch.conf
     lineinfile:
         path: /etc/nsswitch.conf
         regexp: '^myhostname$'
@@ -29,7 +29,7 @@
         backup: yes
     notify: restart_avahi
     
-    name: Setup fonts
+  - name: Setup fonts
     blockinfile:
         path: /etc/fonts/local.conf
         block: |
@@ -53,7 +53,7 @@
                 </match>
             </fontconfig>
 
-    name: Create bitmap symlinks
+  - name: Create bitmap symlinks
     file:
         src: '{{ item }}'
         dest: "/etc/fonts/conf.d"
@@ -63,19 +63,19 @@
         - /etc/fonts/conf.avail/10-sub-pixel-rgb.conf
         - /etc/fonts/conf.avail/11-lcdfilter-default.conf
 
-    name: Enable freetype properties
+  - name: Enable freetype properties
     replace:
       path: /etc/profile.d/freetype2.sh
       regexp: '^#(.*FREETYPE_PROPERTIES.*)'
       replace: '\1'
 
-    name: Enable systemd stuff
+  - name: Enable systemd stuff
     service:
         name:
         state: enabled
     with_items: '{{ enabled-services }}'
 
-    name: User mods
+  - name: User mods
     user:
         name: sean
         groups: docker
