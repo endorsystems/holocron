@@ -136,8 +136,6 @@ pacstrap /mnt \
     usbutils \
     inetutils \
     networkmanager \
-    network-manager-applet \
-    nm-connection-editor \
     ufw \
     git \
     openssh \
