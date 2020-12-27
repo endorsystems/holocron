@@ -96,7 +96,7 @@
         dest: "{{ dstBase }}/{{ item.dst }}"
         state: link
         force: yes
-    with_items:
+    with_items: '{{ dotfile_locations }}'
         - { src: "bash/.bash_profile", dst: ".bash_profile" }
         # - { src: "bash/.bashrc", dst: ".bashrc" }
         # - { src: "dunst/dunst", dst: ".config/dunst" }
