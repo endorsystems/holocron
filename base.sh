@@ -185,8 +185,12 @@ arch-chroot /mnt systemctl enable ufw.service
 
 # Bootloader
 # EFISTUB install
-efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
-arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
+# efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
+# arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
+
+# GRUB
+arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
@@ -194,6 +198,7 @@ cp -R ~/holocron /mnt/home/sean/
 
 ### Reboot ###
 # TODO: create section for reboot questions.
+
 # Unmount partitions
 umount ${part_boot}
 umount ${part_root}
