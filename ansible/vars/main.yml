@@ -7,7 +7,7 @@ required_packages:
   - cups
   - cups-pdf
   - avahi
-  - mdns
+  - nss-mdns
   - docker
   - docker-compose
   - vagrant
