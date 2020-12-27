@@ -72,7 +72,7 @@
       replace: '\1'
 
   - name: Enable systemd stuff
-    service:
+    systemd:
         name: '{{ item }}'
         state: enabled
     with_items: '{{ enabled_services }}'
