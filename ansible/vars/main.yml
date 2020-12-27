@@ -1,5 +1,7 @@
 ---
-default_font: noto-fonts
+serif_font: Noto Serif
+sans_serif_font: Noto Sans
+monospace_font: Noto Mono
 required_packages:
   - i3
   - rofi
