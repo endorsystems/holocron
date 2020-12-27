@@ -44,7 +44,7 @@ required-packages:
   # - ncdu
   # - duplicity
 
-required_aur:
+required-aur:
   - polybar
 
 enabled-services:
