@@ -42,7 +42,6 @@ required_packages:
   - thunar
   - xorg
   - xorg-xinit
-  - i3-color
   - feh
 required_aur:
   - polybar
