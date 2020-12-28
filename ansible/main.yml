@@ -32,7 +32,7 @@
         name: '{{ item }}'
         state: present
         use: pikaur
-        extra_args: '--noconfirm'
+        extra_args: '-Syyu'
     with_items: '{{ required_aur }}'
 
   - name: Setup nsswitch.conf
