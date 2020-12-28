@@ -29,11 +29,10 @@
 
   - name: Install all packages
     aur:
-        name: '{{ item }}'
+        name: '{{ required_packages }}'
         state: present
         use: pikaur
-        extra_args: --noconfirm
-    with_items: '{{ required_packages }}'
+    # with_items: '{{ required_packages }}'
 
   - name: Setup nsswitch.conf
     copy:
