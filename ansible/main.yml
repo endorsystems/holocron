@@ -9,19 +9,6 @@
     - vars/main.yml
 
   tasks:
-#   - name: Install all required packages
-#     community.general.pacman:
-#         name: '{{ item }}'
-#         state: present
-#     with_items: '{{ required_packages }}'
-#     become: yes
-
-#   - name: Remove depandancy issues
-#     community.general.pacman:
-#         name: '{{ item }}'
-#         state: absent
-#     with_items: '{{ remove_packages }}'
-
   - name: Install pikaur manager
     aur:
         name: pikaur
@@ -32,7 +19,6 @@
         name: '{{ required_packages }}'
         state: present
         use: pikaur
-    # with_items: '{{ required_packages }}'
 
   - name: Setup nsswitch.conf
     copy:
@@ -107,6 +93,7 @@
         block: |
             ### Automatically switch to newly-connected devices
             load-module module-switch-on-connect
+    become: yes
 
   - name: Additional settings for bluetooth
     lineinfile:
@@ -114,6 +101,7 @@
         regexp: '^(.*load-module module-bluetooth-policy.*)$'
         backup: yes
         line: '\1 auto_switch=2'
+    become: yes
 
   - name: Download dotfiles
     git:
