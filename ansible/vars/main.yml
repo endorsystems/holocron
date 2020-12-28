@@ -43,6 +43,7 @@ required_packages:
   - xorg
   - xorg-xinit
   - feh
+  - i3lock-color
 required_aur:
   - polybar
   - betterlockscreen
