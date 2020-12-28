@@ -22,10 +22,17 @@
 #         state: absent
 #     with_items: '{{ remove_packages }}'
 
+  - name: Install pikaur manager
+    aur:
+        name: pikaur
+        state: present
+
   - name: Install AUR packages
     aur:
         name: '{{ item }}'
         state: present
+        use: pikaur
+        extra_args: '--noconfirm'
     with_items: '{{ required_aur }}'
 
   - name: Setup nsswitch.conf
