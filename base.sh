@@ -211,4 +211,5 @@ if (whiptail --title "Finished?" --yesno "Are you done with the ISO/Installation
     reboot
 else
     echo "User canceled, dropping to shell."
+    exit 1
 fi
