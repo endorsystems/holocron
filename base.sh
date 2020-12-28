@@ -3,15 +3,9 @@
 # Holocron Arch Linux installer
 #
 
-## Starting this script using simple prompts.
-# TODO: Replace with interactive whiptail prompts.
-# echo "Laptop or VM / Desktop?"
-# read device_type
+# Script welcome page
 
-echo "#######################"
-echo "### Welcome to Holocron ###"
-echo "#######################"
-echo ""
+whiptail --title "Holocron" --msgbox "Welcome to Holocron, automated install of Arch Linux.\nThis script also has Ansible for post install dotfiles and stuff." 8 78
 
 ### CONFIG VARS ###
 # TODO: Put this in a post-condif section? Also need to create escape theads for each question.
@@ -110,8 +104,15 @@ else
     echo "User Canceled. Using default settings."
 fi
 
-# TODO: create partition verification prior to installation.
+# TODO: create verifications prior to installation.
 # this prevents the script from free running.
+
+# if grep -qs '/mnt/' /proc/mounts; then
+#     whiptail --title "Drive Mount Verification" --msgbox "/mnt is mounted, select ok to continue." 8 78
+# else
+#     whiptail --title "Drive Mount Verification" --msgbox "/mnt is NOT mounted, select ok to exit." 8 78
+#     exit 0
+# fi
 
 ### PACKAGE INSTALL ###
 # Using a base install to get the system ready, then a Ansible will be used.
@@ -204,8 +205,10 @@ arch-chroot /mnt chown -R sean:sean /home/sean/holocron
 arch-chroot /mnt ansible-galaxy install kewlfft.aur
 
 ### Reboot ###
-# TODO: create section for reboot questions.
-# Ask if reboot is wanted.
-# Unmount partitions
-umount ${part_boot}
-umount ${part_root}
+if (whiptail --title "Finished?" --yesno "Are you done with the ISO/Installation?" 8 78); then
+    umount ${part_boot}
+    umount ${part_root}
+    reboot
+else
+    echo "User canceled, dropping to shell."
+fi
