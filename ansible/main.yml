@@ -89,6 +89,20 @@
         append: yes
     become: yes
 
+  - name: Auto connection for bluetooth
+    blockinfile:
+        path: /etc/pulse/default.pa
+        block: |
+            ### Automatically switch to newly-connected devices
+            load-module module-switch-on-connect
+
+  - name: Additional settings for bluetooth
+    lineinfile:
+        path: /etc/pulse/default.pa
+        regexp: '^(.*load-module module-bluetooth-policy.*)$'
+        backup: yes
+        line: '\1 auto_switch=2'
+
   - name: Download dotfiles
     git:
         repo: '{{ dots_url }}'
