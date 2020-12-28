@@ -42,9 +42,13 @@ required_packages:
   - thunar
   - xorg
   - xorg-xinit
+  - i3-color
+  - feh
 required_aur:
   - polybar
   - betterlockscreen
+remove_packages:
+  - i3-color
 enabled_services:
   - cups.service
   - avahi-daemon.service
