@@ -16,11 +16,11 @@
     with_items: '{{ required_packages }}'
     become: yes
 
-  - name: Remove depandancy issues
-    community.general.pacman:
-        name: '{{ item }}'
-        state: absent
-    with_items: '{{ remove_packages }}'
+#   - name: Remove depandancy issues
+#     community.general.pacman:
+#         name: '{{ item }}'
+#         state: absent
+#     with_items: '{{ remove_packages }}'
 
   - name: Install AUR packages
     aur:

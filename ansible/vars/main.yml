@@ -46,9 +46,7 @@ required_packages:
 required_aur:
   - polybar
   - i3lock-color
-  - betterlockscreen
 remove_packages:
-  - i3lock
 enabled_services:
   - cups.service
   - avahi-daemon.service
