@@ -44,6 +44,7 @@ required_packages:
   - xorg-xinit
   - feh
 required_aur:
+  - pikaur
   - polybar
   - i3lock-color
 remove_packages:
