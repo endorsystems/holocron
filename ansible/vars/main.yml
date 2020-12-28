@@ -48,7 +48,7 @@ required_aur:
   - i3lock-color
   - betterlockscreen
 remove_packages:
-  - i3-color
+  - i3lock
 enabled_services:
   - cups.service
   - avahi-daemon.service
