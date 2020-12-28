@@ -9,12 +9,12 @@
     - vars/main.yml
 
   tasks:
-  - name: Install all required packages
-    community.general.pacman:
-        name: '{{ item }}'
-        state: present
-    with_items: '{{ required_packages }}'
-    become: yes
+#   - name: Install all required packages
+#     community.general.pacman:
+#         name: '{{ item }}'
+#         state: present
+#     with_items: '{{ required_packages }}'
+#     become: yes
 
 #   - name: Remove depandancy issues
 #     community.general.pacman:
@@ -27,13 +27,13 @@
         name: pikaur
         state: present
 
-  - name: Install AUR packages
+  - name: Install all packages
     aur:
         name: '{{ item }}'
         state: present
         use: pikaur
         extra_args: --noconfirm
-    with_items: '{{ required_aur }}'
+    with_items: '{{ required_packages }}'
 
   - name: Setup nsswitch.conf
     copy:

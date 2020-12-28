@@ -43,10 +43,10 @@ required_packages:
   - xorg
   - xorg-xinit
   - feh
-required_aur:
-  - pikaur
   - polybar
   - i3lock-color
+  - betterlockscreen
+required_aur:
 remove_packages:
 enabled_services:
   - cups.service
