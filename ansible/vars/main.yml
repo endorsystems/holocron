@@ -55,7 +55,7 @@ enabled_services:
 dots_links:
   - { src: "xfiles/.xinitrc", dst: ".xinitrc"}
   - { src: "bash/.bash_profile", dst: ".bash_profile" }
-  # - { src: "bash/.bashrc", dst: ".bashrc" }
+  - { src: "bash/.bashrc", dst: ".bashrc" }
   # - { src: "dunst/dunst", dst: ".config/dunst" }
   # - { src: "rofi/config", dst: ".config/rofi/config" }
   # - { src: "picom/config", dst: ".config/picom.conf" }
