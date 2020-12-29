@@ -148,8 +148,9 @@ pacstrap /mnt \
     zsh \
     efibootmgr \
     ansible \
-    grub \
-    os-prober
+    # grub \
+    # os-prober \
+    refind
 
 # System Configuration
 genfstab -U /mnt > /mnt/etc/fstab
@@ -160,9 +161,6 @@ arch-chroot /mnt echo "LANG=en_US.UTF-8" > /mnt/etc/locale.conf
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/US/Eastern /etc/localtime
 arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel "${sudo_user}"
 
-# File changes
-# mdns_minimal [NOTFOUND=return] ...
-
 # Firewall Rules
 ## Defaults
 arch-chroot /mnt ufw default deny
@@ -172,8 +170,8 @@ arch-chroot /mnt ufw enable
 # ufw limit SSH
 
 ## VPN settings
-# TODO: get DEFAULT_FORWARD_POLICY from DROP to ACCEPT
-# Not sure this is needed because with ufw enabled and on VPN with no issues.
+# Sometimes VPN doesn't work by default use the following to help get it working.
+# DEFAULT_FORWARD_POLICY from DROP to ACCEPT
 
 # User permissions
 echo "${sudo_user} ALL=(ALL) NOPASSWD: ALL" > /mnt/etc/sudoers.d/${sudo_user}
@@ -194,15 +192,19 @@ arch-chroot /mnt systemctl enable NetworkManager
 # efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
 # arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
 
+# refind setup
+# if additional drivers are requried for kernel
+# Use: --alldrivers
+refind-install --usedefault ${part_boot}
+
 # GRUB
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+# arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
 cp -R ~/holocron /mnt/home/sean/
 arch-chroot /mnt chown -R sean:sean /home/sean/holocron
-arch-chroot /mnt ansible-galaxy install kewlfft.aur
 
 ### Reboot ###
 if (whiptail --title "Finished?" --yesno "Are you done with the ISO/Installation?" 8 78); then
