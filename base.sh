@@ -148,6 +148,7 @@ pacstrap /mnt \
     zsh \
     efibootmgr \
     ansible \
+    refind
     # grub \
     # os-prober \
     refind
