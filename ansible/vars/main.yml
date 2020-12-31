@@ -56,15 +56,16 @@ dots_links:
   - { src: "xfiles/.xinitrc", dst: ".xinitrc"}
   - { src: "bash/.bash_profile", dst: ".bash_profile" }
   - { src: "bash/.bashrc", dst: ".bashrc" }
-  - { src: "alacritty/alacritty.yml", dst: ".config/alacritty/alacritty.yml" }
+  - { src: "alacritty", dst: ".config/alacritty" }
   - { src: "backgrounds", dst: ".backgrounds" }
   - { src: "fonts", dst: ".fonts" }
-  - { src: "xfiles/*", dst: "" }
   - { src: "scripts", dst: ".scripts" }
-  # - { src: "dunst/dunst", dst: ".config/dunst" }
-  # - { src: "rofi/config", dst: ".config/rofi/config" }
-  # - { src: "picom/picom.conf", dst: ".config/picom.conf" }
-  # - { src: "i3/config", dst: ".config/i3/config" }
-  # - { src: "i3/colors", dst: ".config/i3/colors"}
-  # - { src: "polybar/config", dst: ".config/polybar/config" }
-
+  - { src: "dunst", dst: ".config/dunst" }
+  - { src: "rofi", dst: ".config/rofi" }
+  - { src: "picom", dst: ".config/picom" }
+  - { src: "i3", dst: ".config/i3" }
+  - { src: "polybar", dst: ".config/polybar" }
+  - { src: "zsh/.zprofile", dst: "" }
+  - { src: "zsh/.zshrc", dst: "" }
+  - { src: "vim/.vimrc", dst: "" }
+  - { src: "vim/.vim", dst: "" }
