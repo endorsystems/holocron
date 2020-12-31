@@ -89,7 +89,6 @@ mkdir /mnt/boot
 mount "${part_boot}" /mnt/boot
 
 ### REPO SETUP ###
-
 # Input box for repo selection
 repo_url=$(whiptail --inputbox "Please type your desired repo url.\nExample:\nLocalfile: file:///media/archlinux/\nLocal Network: http://<IP>/archlinux/\nCancel for default." 11 70  --title "Repo Selection" 3>&1 1>&2 2>&3)
 exitstatus=$?

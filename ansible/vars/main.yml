@@ -58,8 +58,8 @@ dots_links:
   - { src: "bash/.bashrc", dst: ".bashrc" }
   # - { src: "dunst/dunst", dst: ".config/dunst" }
   # - { src: "rofi/config", dst: ".config/rofi/config" }
-  # - { src: "picom/config", dst: ".config/picom.conf" }
-  # - { src: "i3/i3_config", dst: ".config/i3/config" }
-  # - { src: "i3/i3_colors", dst: ".config/i3/colors"}
-  # - { src: "polybar/polybar_config", dst: ".config/polybar/config" }
+  # - { src: "picom/picom.conf", dst: ".config/picom.conf" }
+  # - { src: "i3/config", dst: ".config/i3/config" }
+  # - { src: "i3/colors", dst: ".config/i3/colors"}
+  # - { src: "polybar/config", dst: ".config/polybar/config" }
 
