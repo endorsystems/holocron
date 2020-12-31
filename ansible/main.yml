@@ -123,12 +123,12 @@
   - name: Clone oh-my-zsh
     git:
       repo: https://github.com/ohmyzsh/ohmyzsh.git
-      dest: "{{ ansible_user_dir }}"/.oh-my-zsh
+      dest: "{{ ansible_user_dir }}/.oh-my-zsh"
 
   - name: Clone spaceship
     git:
       repo: https://github.com/denysdovhan/spaceship-prompt.git
-      dest: "$ZSH_CUSTOM/themes/spaceship-prompt"
+      dest: "{{ ansible_user_dir }}/.oh-my-zsh/themes/spaceship.zsh-theme"
 
 # HANDLERS
   handlers:
