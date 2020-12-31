@@ -125,6 +125,11 @@
       repo: https://github.com/ohmyzsh/ohmyzsh.git
       dest: "{{ ansible_user_dir }}"/.oh-my-zsh
 
+  - name: Clone spaceship
+    git:
+      repo: https://github.com/denysdovhan/spaceship-prompt.git
+      dest: "$ZSH_CUSTOM/themes/spaceship-prompt"
+
 # HANDLERS
   handlers:
     - name: restart_avahi
