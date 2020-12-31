@@ -116,7 +116,9 @@
   - name: Symlink spaceship theme
     file:
       src: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" 
-      dst: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+      dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+      state: link
+      force: yes
 
   - name: Download dotfiles
     git:
