@@ -117,6 +117,9 @@
         force: yes
     with_items: '{{ dots_links }}'
 
+  - name: Setup fonts
+    shell: 'fc-cache -fv'
+
 # HANDLERS
   handlers:
     - name: restart_avahi

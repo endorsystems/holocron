@@ -56,6 +56,11 @@ dots_links:
   - { src: "xfiles/.xinitrc", dst: ".xinitrc"}
   - { src: "bash/.bash_profile", dst: ".bash_profile" }
   - { src: "bash/.bashrc", dst: ".bashrc" }
+  - { src: "alacritty/alacritty.yml", dst: ".config/alacritty/alacritty.yml" }
+  - { src: "backgrounds", dst: ".backgrounds" }
+  - { src: "fonts", dst: ".fonts" }
+  - { src: "xfiles/*", dst: "" }
+  - { src: "scripts", dst: ".scripts" }
   # - { src: "dunst/dunst", dst: ".config/dunst" }
   # - { src: "rofi/config", dst: ".config/rofi/config" }
   # - { src: "picom/picom.conf", dst: ".config/picom.conf" }
