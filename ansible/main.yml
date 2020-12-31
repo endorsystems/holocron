@@ -120,6 +120,11 @@
   - name: Setup fonts
     shell: 'fc-cache -fv'
 
+  - name: Clone oh-my-zsh
+    git:
+      repo: https://github.com/ohmyzsh/ohmyzsh.git
+      dest: "{{ ansible_user_dir }}"/.oh-my-zsh
+
 # HANDLERS
   handlers:
     - name: restart_avahi
