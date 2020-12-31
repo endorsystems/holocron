@@ -103,6 +103,21 @@
         line: '\1 auto_switch=2'
     become: yes
 
+  - name: Clone oh-my-zsh
+    git:
+      repo: https://github.com/ohmyzsh/ohmyzsh.git
+      dest: "{{ ansible_user_dir }}/.oh-my-zsh"
+
+  - name: Clone spaceship
+    git:
+      repo: https://github.com/denysdovhan/spaceship-prompt.git
+      dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt"
+
+  - name: Symlink spaceship theme
+    file:
+      src: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" 
+      dst: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+
   - name: Download dotfiles
     git:
         repo: '{{ dots_url }}'
@@ -119,16 +134,6 @@
 
   - name: Setup fonts
     shell: 'fc-cache -fv'
-
-  - name: Clone oh-my-zsh
-    git:
-      repo: https://github.com/ohmyzsh/ohmyzsh.git
-      dest: "{{ ansible_user_dir }}/.oh-my-zsh"
-
-  - name: Clone spaceship
-    git:
-      repo: https://github.com/denysdovhan/spaceship-prompt.git
-      dest: "{{ ansible_user_dir }}/.oh-my-zsh/themes/spaceship.zsh-theme"
 
 # HANDLERS
   handlers:
