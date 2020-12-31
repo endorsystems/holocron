@@ -5,6 +5,7 @@ sans_serif_font: Noto Sans
 monospace_font: Noto Mono
 required_packages:
   - i3-gaps
+  - i3status
   - rofi
   - dunst
   - cups
