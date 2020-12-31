@@ -54,6 +54,7 @@ enabled_services:
   - bluetooth.service
 dots_links:
   - { src: "xfiles/.xinitrc", dst: ".xinitrc"}
+  - { src: "xfiles/.Xresources", dst: ".Xresources"}
   - { src: "bash/.bash_profile", dst: ".bash_profile" }
   - { src: "bash/.bashrc", dst: ".bashrc" }
   - { src: "alacritty", dst: ".config/alacritty" }
@@ -65,7 +66,7 @@ dots_links:
   - { src: "picom", dst: ".config/picom" }
   - { src: "i3", dst: ".config/i3" }
   - { src: "polybar", dst: ".config/polybar" }
-  - { src: "zsh/.zprofile", dst: "" }
-  - { src: "zsh/.zshrc", dst: "" }
-  - { src: "vim/.vimrc", dst: "" }
-  - { src: "vim/.vim", dst: "" }
+  - { src: "zsh/.zprofile", dst: ".zprofile" }
+  - { src: "zsh/.zshrc", dst: ".zshrc" }
+  - { src: "vim/.vimrc", dst: ".vimrc" }
+  - { src: "vim/.vim", dst: ".vim" }
