@@ -48,6 +48,11 @@ required_packages:
   - polybar
   - i3lock-color
   - betterlockscreen
+  - remmina
+  - freerdp
+  - openfortivpn
+  - unzip
+  - teams
 required_aur:
 remove_packages:
 enabled_services:
