@@ -1,8 +1,5 @@
 ---
 dots_url: https://github.com/endorsystems/dotfiles.git
-serif_font: Noto Serif
-sans_serif_font: Noto Sans
-monospace_font: Noto Mono
 required_packages:
   - cups
   - cups-pdf
@@ -71,6 +68,7 @@ required_packages:
   - ttf-opensans
   - ttf-ubuntu-font-family
   - google-chrome-dev
+# spotify is broken trying to install it here
 enabled_services:
   - cups.service
   - avahi-daemon.service
