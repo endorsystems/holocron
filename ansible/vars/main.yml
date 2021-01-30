@@ -4,21 +4,17 @@ serif_font: Noto Serif
 sans_serif_font: Noto Sans
 monospace_font: Noto Mono
 required_packages:
-  - i3-gaps
-  - i3status
-  - rofi
-  - dunst
   - cups
   - cups-pdf
   - avahi
   - nss-mdns
   - alacritty
+  - fontconfig
   - docker
   - docker-compose
   - vagrant
   - virtualbox
   - virtualbox-guest-utils
-  - minikube
   - alsa
   - pulseaudio
   - pulseaudio-alsa
@@ -28,33 +24,53 @@ required_packages:
   - pulsemixer
   - playerctl
   - samba
-  - ttf-dejavu
-  - ttf-liberation 
-  - noto-fonts
   - neofetch
   - caprine
-  - picom
   - tmux
   - grim
   - libreoffice-fresh
-  - code
   - network-manager-applet
   - nm-connection-editor
   - sane
-  - thunar
-  - xorg
-  - xorg-xinit
   - feh
-  - polybar
-  - i3lock-color
-  - betterlockscreen
   - remmina
   - freerdp
   - openfortivpn
   - unzip
   - teams
-required_aur:
-remove_packages:
+  - vscodium-bin
+  - inxi
+  - blueman
+  - ttf-dejavu
+  - ttf-liberation
+  - noto-fonts
+  - noto-fonts-extra
+  - noto-fonts-emoji
+  - ttf-font-awesome
+  - lightdm
+  - lightdm-webkit2-greeter
+  - lightdm-webkit-theme-aether
+  - i3-gaps
+  - i3status
+  - rofi
+  - dunst
+  - picom
+  - xorg
+  - xorg-xinit
+  - polybar
+  - thunar
+  - gvfs
+  - thunar-media-tags-plugin
+  - ttf-ibm-plex
+  - ttf-fira-mono
+  - ttf-fira-sans
+  - ttf-fira-code
+  - ttf-nerd-fonts-symbols
+  - ttf-roboto
+  - ttf-roboto-mono
+  - ttf-opensans
+  - ttf-ubuntu-font-family
+  - google-chrome-dev
 enabled_services:
   - cups.service
   - avahi-daemon.service
@@ -77,3 +93,8 @@ dots_links:
   - { src: "zsh/.zshrc", dst: ".zshrc" }
   - { src: "vim/.vimrc", dst: ".vimrc" }
   - { src: "vim/.vim", dst: ".vim" }
+git_requirements:
+  - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh"}
+  - { repo: "https://github.com/denysdovhan/spaceship-prompt.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt"}
+  - { repo: "https://github.com/dracula/gtk.git", dst: "{{ ansible_user_dir }}/.themes/Dracula"}
+  - { repo: "https://github.com/cbrnix/Flatery.git", dst: "{{ ansible_user_dir }}/.icons"}

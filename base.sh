@@ -135,8 +135,9 @@ pacstrap /mnt \
     sysfsutils \
     usbutils \
     inetutils \
-    networkmanager \
     ufw \
+    networkmanager \
+    iwd \
     git \
     openssh \
     rsync \
@@ -146,9 +147,9 @@ pacstrap /mnt \
     hwinfo \
     zsh \
     efibootmgr \
-    ansible \
     grub \
     os-prober \
+    ansible
 
 # System Configuration
 genfstab -U /mnt > /mnt/etc/fstab
@@ -187,7 +188,7 @@ arch-chroot /mnt systemctl enable NetworkManager
 # TODO: figure out bootloader mess. EFISTUB isn't even working on Dell or VMware. Defaulting to grub because of this.
 # explore refined
 # EFISTUB install
-# efi_partuuid=`blkid | grep ${disk}2 | awk -F'"' '{print $10}'` 
+# efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
 # arch-chroot /mnt efibootmgr --disk ${disk} --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode "root=PARTUUID=${efi_partuuid} rw initrd=\initramfs-linux.img" --verbose
 
 # refind setup

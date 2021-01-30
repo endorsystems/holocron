@@ -27,32 +27,12 @@
         backup: yes
     become: yes
     notify: restart_avahi
-    
-  # - name: Setup fonts
-  #   blockinfile:
-  #       path: /etc/fonts/local.conf
-  #       block: |
-  #           <?xml version="1.0"?>
-  #           <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-  #           <fontconfig>
-  #               <match>
-  #                   <edit mode="prepend" name="family"><string>{{ sans_serif_font }}</string></edit>
-  #               </match>
-  #               <match target="pattern">
-  #                   <test qual="any" name="family"><string>serif</string></test>
-  #                   <edit name="family" mode="assign" binding="same"><string>{{ serif_font }}</string></edit>
-  #               </match>
-  #               <match target="pattern">
-  #                   <test qual="any" name="family"><string>sans-serif</string></test>
-  #                   <edit name="family" mode="assign" binding="same"><string>{{ sans_serif_font }}</string></edit>
-  #               </match>
-  #               <match target="pattern">
-  #                   <test qual="any" name="family"><string>monospace</string></test>
-  #                   <edit name="family" mode="assign" binding="same"><string>{{ monospace_font }}</string></edit>
-  #               </match>
-  #           </fontconfig>
-  #       create: yes
-  #   become: yes
+  
+  - name: Setup local.conf for Fonts
+    copy:
+      src: files/local.conf
+      dest: /etc/fonts/
+    become: true
 
   - name: Create bitmap symlinks
     file:
@@ -87,31 +67,17 @@
         append: yes
     become: yes
 
-  # - name: Auto connection for bluetooth
-  #   blockinfile:
-  #       path: /etc/pulse/default.pa
-  #       block: |
-  #           ### Automatically switch to newly-connected devices
-  #           load-module module-switch-on-connect
-  #   become: yes
+  - name: Auto connection for bluetooth
+    copy:
+      src: files/default.pa
+      dest: /etc/pulse/default.pa
+    become: true
 
-  # - name: Additional settings for bluetooth
-  #   lineinfile:
-  #       path: /etc/pulse/default.pa
-  #       regexp: '^(.*load-module module-bluetooth-policy.*)$'
-  #       backup: yes
-  #       line: '\1 auto_switch=2'
-  #   become: yes
-
-  - name: Clone oh-my-zsh
+  - name: Clone dependancies
     git:
-      repo: https://github.com/ohmyzsh/ohmyzsh.git
-      dest: "{{ ansible_user_dir }}/.oh-my-zsh"
-
-  - name: Clone spaceship
-    git:
-      repo: https://github.com/denysdovhan/spaceship-prompt.git
-      dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt"
+      repo: '{{ item.repo }}'
+      dest: '{{ item.dst }}'
+    with_items: '{{ git_requirements }}'
 
   - name: Symlink spaceship theme
     file:
@@ -133,9 +99,7 @@
         state: link
         force: yes
     with_items: '{{ dots_links }}'
-
-  - name: Setup fonts
-    shell: 'fc-cache -fv'
+    notify: refresh_fonts
 
 # HANDLERS
   handlers:
@@ -144,3 +108,6 @@
         name: avahi-daemon
         state: restarted
       become: yes
+
+    - name: refresh_fonts
+      shell: 'fc-cache -fv'

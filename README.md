@@ -30,3 +30,15 @@ https://github.com/kewlfft/ansible-aur.git
 https://github.com/endorsystems/dotfiles
 - Dracula, used for a lot of the themes. (alacritty, i3, sway, wofi, rofi, dunst, xresources, etc...)
 https://github.com/dracula/dracula-theme
+
+## TODO List
+
+- I'm trying to perfect the final installed version.
+Problems I'm having.
+
+- bluetooth connecting and using.
+- icon consistancy
+- font consistancy
+- wm and de, login page and lock screen with timeout
+- speed and stability
+- steam?
