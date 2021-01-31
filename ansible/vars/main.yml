@@ -35,7 +35,7 @@ required_packages:
   - openfortivpn
   - unzip
   - teams
-  - vscodium-bin
+  - visual-studio-code-bin
   - inxi
   - blueman
   - ttf-dejavu
@@ -44,9 +44,6 @@ required_packages:
   - noto-fonts-extra
   - noto-fonts-emoji
   - ttf-font-awesome
-  - lightdm
-  - lightdm-webkit2-greeter
-  - lightdm-webkit-theme-aether
   - i3-gaps
   - i3status
   - rofi
@@ -91,6 +88,8 @@ dots_links:
   - { src: "zsh/.zshrc", dst: ".zshrc" }
   - { src: "vim/.vimrc", dst: ".vimrc" }
   - { src: "vim/.vim", dst: ".vim" }
+  - { src: "gtk/.gtkrc-2.0", dst: ".gtkrc-2.0" }
+  - { src: "gtk/gtk3-settings.ini", dst: ".config/gtk-3.0/settings.ini" }
 git_requirements:
   - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh"}
   - { repo: "https://github.com/denysdovhan/spaceship-prompt.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt"}
