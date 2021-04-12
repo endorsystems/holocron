@@ -1,5 +1,5 @@
 ---
-dots_url: https://github.com/endorsystems/dotfiles.git
+dots_url: https://github.com/shelmus/dotfiles.git
 required_packages:
   - cups
   - cups-pdf
@@ -8,7 +8,6 @@ required_packages:
   - alacritty
   - docker
   - docker-compose
-  - vagrant
   - bluez
   - bluez-utils
   - pipewire
@@ -32,6 +31,7 @@ required_packages:
   - ttf-fira-code
   - ttf-nerd-fonts-symbols
   - htop
+  - xdg-user-dir
 # gui items
   - sway
   - swayidle

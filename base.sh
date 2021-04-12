@@ -147,7 +147,7 @@ pacstrap /mnt \
     hwinfo \
     zsh \
     efibootmgr \
-    grub \
+    refind \
     os-prober \
     ansible
 
@@ -194,11 +194,11 @@ arch-chroot /mnt systemctl enable NetworkManager
 # refind setup
 # if additional drivers are requried for kernel
 # Use: --alldrivers
-# refind-install --usedefault ${part_boot}
+refind-install --usedefault ${part_boot}
 
 # GRUB
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+# arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
