@@ -34,16 +34,16 @@
       dest: /etc/fonts/
     become: true
 
-  - name: Create bitmap symlinks
-    file:
-        src: "/etc/fonts/conf.avail/{{ item }}"
-        dest: "/etc/fonts/conf.d/{{ item }}"
-        state: link
-    become: yes
-    with_items:
-        - 70-no-bitmaps.conf
-        - 10-sub-pixel-rgb.conf
-        - 11-lcdfilter-default.conf
+  # - name: Create bitmap symlinks
+  #   file:
+  #       src: "/etc/fonts/conf.avail/{{ item }}"
+  #       dest: "/etc/fonts/conf.d/{{ item }}"
+  #       state: link
+  #   become: yes
+  #   with_items:
+  #       - 70-no-bitmaps.conf
+  #       - 10-sub-pixel-rgb.conf
+  #       - 11-lcdfilter-default.conf
 
   - name: Enable freetype properties
     replace:

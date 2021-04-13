@@ -39,13 +39,16 @@ required_packages:
   - waybar
   - wofi
   - mako
-  - vscodium
+  # - vscodium
   - imagemagick
   - papirus-icon-theme
   - mesa
   - remmina
   - freerdp
+  - wofi-wifi-menu-git
+  - fontconfig
   - lxappearance
+  - zathura
   - libva-intel-driver
   - libva-vdpau-driver
   - libreoffice-fresh
@@ -53,7 +56,7 @@ required_packages:
   - xorg-xwayland
 # workrelated
   - teams
-  - rocketchat-desktop
+  # - rocketchat-desktop
   - openfortivpn
 enabled_services:
   - cups.service
@@ -63,6 +66,7 @@ dots_links:
   - { src: "mako", dst: ".config/mako" }
   - { src: "waybar", dst: ".config/waybar" }
   - { src: "sway", dst: ".config/sway" }
+  - { src: "wofi", dst:: ".config/wofi"}
   - { src: "alacritty", dst: ".config/alacritty" }
   - { src: "backgrounds", dst: ".backgrounds" }
   - { src: "fonts", dst: ".fonts" }
