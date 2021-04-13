@@ -194,8 +194,13 @@ arch-chroot /mnt systemctl enable NetworkManager
 # refind setup
 # if additional drivers are requried for kernel
 # Use: --alldrivers
-refind-install --usedefault ${part_boot}
-
+efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
+arch-chroot /mnt refind-install
+cat <<EOF >> /boot/refind-linux.conf
+"Boot using default options"     "root=PARTUUID=${efi_partuuid} rw add_efi_memmap"
+"Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
+"Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
+EOF
 # GRUB
 # arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 # arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
