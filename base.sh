@@ -79,23 +79,29 @@ fi
 parted --script "${disk%%\ *}" -- mklabel gpt \
   mkpart ESP fat32 1Mib 513MiB \
   set 1 boot on \
-  mkpart primary swap 513MiB 2561MiB \
+  mkpart swap 513MiB 2561MiB \
   mkpart primary xfs 2561MiB 43521MiB \
-  mkpart primary xfs 43521MiB 45569MiB \
-  mkpart primary xfs 45569MiB 100%
+  mkpart primary xfs 43521MiB 100%
 
 # Assign vars to partitions
 part_boot="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?1$")"
-part_root="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?2$")"
+part_swap="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?2$")"
+part_root="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?3$")"
+part_home="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?4$")"
 
 # Formatting
 mkfs.fat -F32 "${part_boot}"
 mkfs.xfs -f "${part_root}"
+mkfs.xfs -f "${part_home}"
+mkswap "${part_swap}"
 
 # Mounting
+swapon "${part_swap}"
 mount "${part_root}" /mnt
 mkdir /mnt/boot
+mkdir -p /mnt/home
 mount "${part_boot}" /mnt/boot
+mount "${part_home}" /mnt/home
 
 ### REPO SETUP ###
 # Input box for repo selection
