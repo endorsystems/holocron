@@ -70,10 +70,19 @@ then
 fi
 
 # Create partitions
+# EFI boot 512M (EFI/FAT32)
+# swap 2G (SWAP)
+# root 40G (XFS)
+# var/log 2G (XFS)
+# home (remainder) 
+
 parted --script "${disk%%\ *}" -- mklabel gpt \
   mkpart ESP fat32 1Mib 513MiB \
   set 1 boot on \
-  mkpart primary xfs 513MiB 100%
+  mkpart primary swap 513MiB 2561MiB \
+  mkpart primary xfs 2561MiB 43521MiB \
+  mkpart primary xfs 43521MiB 45569MiB \
+  mkpart primary xfs 45569MiB 100%
 
 # Assign vars to partitions
 part_boot="$(ls ${disk%%\ *}* | grep -E "^${disk%%\ *}p?1$")"
@@ -148,6 +157,7 @@ pacstrap /mnt \
     zsh \
     efibootmgr \
     refind \
+    grub \
     os-prober \
     ansible
 
@@ -186,6 +196,8 @@ arch-chroot /mnt systemctl enable NetworkManager
 
 # Bootloader
 # TODO: figure out bootloader mess. EFISTUB isn't even working on Dell or VMware. Defaulting to grub because of this.
+# Looks like booting from refind and setting up in ramdisk is troublesome. 
+# I will be installing grub efi and replacing it with refind with the post install.
 # explore refined
 # EFISTUB install
 # efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
@@ -194,16 +206,17 @@ arch-chroot /mnt systemctl enable NetworkManager
 # refind setup
 # if additional drivers are requried for kernel
 # Use: --alldrivers
-efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
-arch-chroot /mnt refind-install
-cat <<EOF >> /boot/refind-linux.conf
-"Boot using default options"     "root=PARTUUID=${efi_partuuid} rw add_efi_memmap"
-"Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
-"Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
-EOF
+# efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
+# arch-chroot /mnt refind-install
+# cat <<EOF >> /boot/refind-linux.conf
+# "Boot using default options"     "rw root=PARTUUID=${efi_partuuid} add_efi_memmap"
+# "Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
+# "Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
+# EOF
+
 # GRUB
-# arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
