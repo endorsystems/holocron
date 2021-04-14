@@ -42,7 +42,7 @@ required_packages:
   # - vscodium
   - imagemagick
   - papirus-icon-theme
-  - mesa
+  - nvidia
   - remmina
   - freerdp
   - wofi-wifi-menu-git
@@ -66,7 +66,7 @@ dots_links:
   - { src: "mako", dst: ".config/mako" }
   - { src: "waybar", dst: ".config/waybar" }
   - { src: "sway", dst: ".config/sway" }
-  - { src: "wofi", dst:: ".config/wofi"}
+  - { src: "wofi", dst: ".config/wofi"}
   - { src: "alacritty", dst: ".config/alacritty" }
   - { src: "backgrounds", dst: ".backgrounds" }
   - { src: "fonts", dst: ".fonts" }
