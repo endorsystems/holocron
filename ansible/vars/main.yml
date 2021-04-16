@@ -57,7 +57,7 @@ required_packages:
   - xorg-xwayland
 # workrelated
   - teams
-  - rocketchat-desktop
+  # - rocketchat-desktop
   - openfortivpn
 enabled_services:
   - cups.service
