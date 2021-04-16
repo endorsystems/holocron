@@ -31,7 +31,6 @@ required_packages:
   - ttf-fira-code
   - ttf-nerd-fonts-symbols
   - htop
-  - xdg-user-dir
   - xdg-desktop-portal-wlr
 # gui items
   - sway
