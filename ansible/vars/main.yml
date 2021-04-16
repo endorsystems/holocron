@@ -53,7 +53,6 @@ required_packages:
   - libva-vdpau-driver
   - libreoffice-fresh
   - google-chrome
-  - spotify
 # xwayland
   - xorg-xwayland
 # workrelated
