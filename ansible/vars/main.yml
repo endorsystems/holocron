@@ -32,6 +32,7 @@ required_packages:
   - ttf-nerd-fonts-symbols
   - htop
   - xdg-user-dir
+  - xdg-desktop-portal-wlr
 # gui items
   - sway
   - swayidle
@@ -39,10 +40,10 @@ required_packages:
   - waybar
   - wofi
   - mako
-  # - vscodium
+  - code
   - imagemagick
   - papirus-icon-theme
-  - nvidia
+  - mesa
   - remmina
   - freerdp
   - wofi-wifi-menu-git
@@ -52,11 +53,13 @@ required_packages:
   - libva-intel-driver
   - libva-vdpau-driver
   - libreoffice-fresh
+  - google-chrome
+  - spotify
 # xwayland
   - xorg-xwayland
 # workrelated
   - teams
-  # - rocketchat-desktop
+  - rocketchat-desktop
   - openfortivpn
 enabled_services:
   - cups.service
