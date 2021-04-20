@@ -32,6 +32,7 @@ required_packages:
   - ttf-nerd-fonts-symbols
   - htop
   - xdg-desktop-portal-wlr
+  - xdg-user-dirs
 # gui items
   - sway
   - swayidle
@@ -42,7 +43,7 @@ required_packages:
   - code
   - imagemagick
   - papirus-icon-theme
-  - mesa
+  - nvidia
   - remmina
   - freerdp
   - wofi-wifi-menu-git
@@ -53,6 +54,8 @@ required_packages:
   - libva-vdpau-driver
   - libreoffice-fresh
   - google-chrome
+  - yad
+  - gnome-calculator
 # xwayland
   - xorg-xwayland
 # workrelated
