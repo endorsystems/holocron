@@ -33,7 +33,6 @@ required_packages:
   - htop
   - xdg-desktop-portal-wlr
   - xdg-user-dirs
-# gui items
   - sway
   - swayidle
   - swaylock
@@ -57,12 +56,10 @@ required_packages:
   - yad
   - gnome-calculator
   - swappy
-# xwayland
   - xorg-xwayland
-# workrelated
-  - teams
+  # - teams
   # - rocketchat-desktop
-  - openfortivpn
+  # - openfortivpn
 enabled_services:
   - cups.service
   - avahi-daemon.service
