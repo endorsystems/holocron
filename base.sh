@@ -212,7 +212,7 @@ arch-chroot /mnt systemctl enable NetworkManager
 # Use: --alldrivers
 efi_partuuid=$(blkid | grep ${part_root} | awk -F'"' '{print $10}')
 arch-chroot /mnt refind-install
-cat <<EOF >> /mnt/boot/refind-linux.conf
+cat <<EOF > /mnt/boot/refind_linux.conf
 "Boot using default options"     "rw root=PARTUUID=${efi_partuuid} add_efi_memmap"
 "Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
 "Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
