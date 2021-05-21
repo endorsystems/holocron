@@ -73,7 +73,6 @@ fi
 # EFI boot 512M (EFI/FAT32)
 # swap 2G (SWAP)
 # root 40G (XFS)
-# var/log 2G (XFS)
 # home (remainder) 
 
 parted --script "${disk%%\ *}" -- mklabel gpt \
@@ -98,7 +97,7 @@ mkswap "${part_swap}"
 # Mounting
 swapon "${part_swap}"
 mount "${part_root}" /mnt
-mkdir /mnt/boot
+mkdir -p /mnt/boot
 mkdir -p /mnt/home
 mount "${part_boot}" /mnt/boot
 mount "${part_home}" /mnt/home
@@ -163,7 +162,6 @@ pacstrap /mnt \
     zsh \
     efibootmgr \
     refind \
-    grub \
     os-prober \
     ansible
 
@@ -212,17 +210,17 @@ arch-chroot /mnt systemctl enable NetworkManager
 # refind setup
 # if additional drivers are requried for kernel
 # Use: --alldrivers
-# efi_partuuid=`blkid | grep ${part_root} | awk -F'"' '{print $10}'` 
-# arch-chroot /mnt refind-install
-# cat <<EOF >> /boot/refind-linux.conf
-# "Boot using default options"     "rw root=PARTUUID=${efi_partuuid} add_efi_memmap"
-# "Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
-# "Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
-# EOF
+efi_partuuid=$(blkid | grep ${part_root} | awk -F'"' '{print $10}')
+arch-chroot /mnt refind-install
+cat <<EOF >> /boot/refind-linux.conf
+"Boot using default options"     "rw root=PARTUUID=${efi_partuuid} add_efi_memmap"
+"Boot using fallback initramfs"  "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v-fallback.img"
+"Boot to terminal"               "root=PARTUUID=${efi_partuuid} rw add_efi_memmap initrd=boot\initramfs-%v.img systemd.unit=multi-user.target"
+EOF
 
 # GRUB
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+# arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+# arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
 ## Start post config ##
 # TODO: Insert scripts to be run at login? Or maunal executions?
@@ -232,6 +230,7 @@ arch-chroot /mnt chown -R sean:sean /home/sean/holocron
 ### Reboot ###
 if (whiptail --title "Finished?" --yesno "Are you done with the ISO/Installation?" 8 78); then
     umount ${part_boot}
+    umount ${part_home}
     umount ${part_root}
     reboot
 else
