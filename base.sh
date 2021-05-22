@@ -18,7 +18,7 @@ else
     echo "User Canceled."
 fi
 # sudo username
-sudo_user=$(whiptail --inputbox "Please type the requested sudo user." 8 39  --title "Sudo User" 3>&1 1>&2 2>&3)
+sudo_user=$(whiptail --inputbox "Please type a username for sudo user." 8 39  --title "Sudo User" 3>&1 1>&2 2>&3)
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
     echo "Confirmed: ${sudo_user}"
