@@ -89,12 +89,12 @@
   - name: Download dotfiles
     git:
         repo: '{{ dots_url }}'
-        dest: '{{ ansible_user_dir }}/dotfiles'
+        dest: '{{ ansible_user_dir }}/workspace/dotfiles'
         update: yes
 
   - name: Install dotfiles
     file:
-        src: "{{ ansible_user_dir }}/dotfiles/{{ item.src }}"
+        src: "{{ ansible_user_dir }}/workspace/dotfiles/{{ item.src }}"
         dest: "{{ ansible_user_dir }}/{{ item.dst }}"
         state: link
         force: yes

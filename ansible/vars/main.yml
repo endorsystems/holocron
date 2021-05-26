@@ -31,57 +31,54 @@ required_packages:
   - ttf-fira-code
   - ttf-nerd-fonts-symbols
   - htop
-  - xdg-desktop-portal-wlr
+  - xdg-desktop-portal-gtk
+  - gnome
+  - gnome-extra
   - xdg-user-dirs
-# gui items
-  - sway
-  - swayidle
-  - swaylock
-  - waybar
-  - wofi
-  - mako
   - code
   - imagemagick
   - papirus-icon-theme
   - nvidia
   - remmina
   - freerdp
-  - wofi-wifi-menu-git
   - fontconfig
   - lxappearance
-  - zathura
   - libva-intel-driver
   - libva-vdpau-driver
   - libreoffice-fresh
-  - google-chrome
+  - firefox
   - yad
+<<<<<<< HEAD
   - gnome-calculator
   - swappy
 # xwayland
+=======
+  - swappy
+>>>>>>> dc5108fceee79bc8d637966e2c4d2bfeacd86efb
   - xorg-xwayland
-# workrelated
   - teams
-  # - rocketchat-desktop
+  - rocketchat-desktop
   - openfortivpn
+  - network-manager-fortisslvpn
 enabled_services:
   - cups.service
   - avahi-daemon.service
   - bluetooth.service
 dots_links:
-  - { src: "mako", dst: ".config/mako" }
-  - { src: "waybar", dst: ".config/waybar" }
-  - { src: "sway", dst: ".config/sway" }
-  - { src: "wofi", dst: ".config/wofi"}
-  - { src: "alacritty", dst: ".config/alacritty" }
+  # - { src: "mako", dst: ".config/mako" }
+  # - { src: "waybar", dst: ".config/waybar" }
+  # - { src: "sway", dst: ".config/sway" }
+  # - { src: "wofi", dst: ".config/wofi"}
+  # - { src: "alacritty", dst: ".config/alacritty" }
   - { src: "backgrounds", dst: ".backgrounds" }
   - { src: "fonts", dst: ".fonts" }
   - { src: "scripts", dst: ".scripts" }
   - { src: "zsh/.zprofile", dst: ".zprofile" }
   - { src: "zsh/.zshrc", dst: ".zshrc" }
-  - { src: "zsh/.zsh", dst: ".zsh" }
+  # - { src: "zsh/.zsh", dst: ".zsh" }
   - { src: "zsh/.zshenv", dst: ".zshenv" }
   - { src: "tmux/.tmux.conf", dst: ".tmux.conf" }
 git_requirements:
   - { repo: "https://github.com/ohmyzsh/ohmyzsh.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh"}
   - { repo: "https://github.com/denysdovhan/spaceship-prompt.git", dst: "{{ ansible_user_dir }}/.oh-my-zsh/custom/themes/spaceship-prompt"}
-  - { repo: "https://github.com/dracula/gtk.git", dst: "{{ ansible_user_dir }}/.themes/Dracula"}
+  # - { repo: "https://github.com/dracula/gtk.git", dst: "{{ ansible_user_dir }}/.themes/Dracula"}
