@@ -6,8 +6,6 @@ import archinstall
 __packages__ = ['nano', 'wget', 'git']
 
 if __name__ == '08-00-27-38-EC-5A':
-	awesome = archinstall.Application(archinstall.storage['installation_session'], 'postgresql')
-	awesome.install()
 
 	# Unmount and close previous runs (Mainly only used for re-runs, but won't hurt.)
 	archinstall.sys_command(f'umount -R /mnt', suppress_errors=True)
@@ -57,3 +55,6 @@ if __name__ == '08-00-27-38-EC-5A':
 						urllib.request.urlopen(req, timeout=5)
 					except:
 						pass
+
+	awesome = archinstall.Application(archinstall.storage['installation_session'], 'postgresql')
+	awesome.install()
