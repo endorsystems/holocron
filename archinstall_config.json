@@ -1,0 +1,32 @@
+{
+    "audio": "pipewire",
+    "bootloader": "refind",
+    "!encryption-password": "candypatronize",
+    "filesystem": "xfs",
+    "harddrive": {
+        "path": "/dev/nvme0n1"
+    },
+    "hostname": "vm01",
+    "kernels": [
+        "linux"
+    ],
+    "keyboard-language": "us",
+    "mirror-region": {
+        "Worldwide": {
+            "https://mirrors.kernel.org/archlinux/$repo/os/$arch": true
+        }
+    },
+    "nic": {
+        "NetworkManager": true
+    },
+    "packages": ["zsh", "git", "docker"],
+    "profile": "sway",
+    "service": ["docker"],
+    "superusers": {
+        "sean": {
+            "!password": "monkeys"
+        }
+    },
+    "timezone": "US/Eastern",
+    "users": {}
+}
