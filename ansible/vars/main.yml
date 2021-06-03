@@ -35,7 +35,7 @@ required_packages:
   - code
   - imagemagick
   - papirus-icon-theme
-  - nvidia
+  - mesa
   - remmina
   - freerdp
   - fontconfig
