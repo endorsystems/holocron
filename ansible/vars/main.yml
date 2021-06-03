@@ -31,9 +31,6 @@ required_packages:
   - ttf-fira-code
   - ttf-nerd-fonts-symbols
   - htop
-  - xdg-desktop-portal-gtk
-  - gnome
-  - gnome-extra
   - xdg-user-dirs
   - code
   - imagemagick
@@ -48,18 +45,13 @@ required_packages:
   - libreoffice-fresh
   - firefox
   - yad
-<<<<<<< HEAD
-  - gnome-calculator
   - swappy
-# xwayland
-=======
-  - swappy
->>>>>>> dc5108fceee79bc8d637966e2c4d2bfeacd86efb
   - xorg-xwayland
   - teams
-  - rocketchat-desktop
   - openfortivpn
-  - network-manager-fortisslvpn
+  - sway
+  - swaylock
+  - swayidle
 enabled_services:
   - cups.service
   - avahi-daemon.service
@@ -69,7 +61,7 @@ dots_links:
   # - { src: "waybar", dst: ".config/waybar" }
   # - { src: "sway", dst: ".config/sway" }
   # - { src: "wofi", dst: ".config/wofi"}
-  # - { src: "alacritty", dst: ".config/alacritty" }
+  - { src: "alacritty", dst: ".config/alacritty" }
   - { src: "backgrounds", dst: ".backgrounds" }
   - { src: "fonts", dst: ".fonts" }
   - { src: "scripts", dst: ".scripts" }
